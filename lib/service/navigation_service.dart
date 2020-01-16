@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+
+class NavigationService {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  /// Navigate to a route with the name [routeName]
+  Future<dynamic> navigateTo(String routeName, {dynamic arguments}) {
+    return navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
+  }
+  /// Navigate too a route, replacing the current stack
+  Future<dynamic> navigateToReplacing(String routeName, {dynamic arguments}){
+    return navigatorKey.currentState.pushReplacementNamed(routeName);
+  }
+  /// Go back to the previous route
+  ///
+  /// Return `true` if successful, `false` otherwise
+  bool goBack() {
+    return navigatorKey.currentState.pop();
+  }
+}
+
+class Routes {
+  static final String Home = "/home";
+  static final String Login = "/login";
+}

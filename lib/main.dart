@@ -6,8 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:circleci_flutter/home/home_screen.dart';
 import 'package:circleci_flutter/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
+import 'package:get_it/get_it.dart';
+import 'service/navigation_service.dart';
 
-void main() => runApp(MyApp());
+void main() {
+
+  GetIt.instance.registerSingleton(NavigationService());
+
+  return runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -19,7 +26,10 @@ class MyApp extends StatelessWidget {
       2: LoginPage()
     };
 
+    NavigationService navigationService = GetIt.instance.get();
+
     return new MaterialApp(
+      navigatorKey: navigationService.navigatorKey,
       theme: ThemeData(
           primarySwatch: Colors.blue,
           primaryColor: defaultTargetPlatform == TargetPlatform.iOS
@@ -45,6 +55,9 @@ class MyApp extends StatelessWidget {
         outputAndHome: _returnValueAndHomeScreen,
       ),
       onGenerateRoute: (RouteSettings settings) {
+        if (settings.name == Routes.Home) {
+          return MaterialPageRoute(builder: (_) => HomePage());
+        }
         var page = settings.name.startsWith('/page/')
             ? NewPage(settings.name.substring(6))
             : NewPage("Invalid");
