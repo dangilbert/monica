@@ -36,6 +36,11 @@ class _LoginPageState extends State<LoginPage> {
               WidgetsBinding.instance.addPostFrameCallback((duration) {
                 Scaffold.of(context).showSnackBar(snackBar);
               });
+            } else if (effect.hasData && effect.data is LoginBlocConnectionFailedError) {
+              final snackBar = SnackBar(content: Text(I18n.of(context).loginErrorConnectionFailed));
+              WidgetsBinding.instance.addPostFrameCallback((duration) {
+                Scaffold.of(context).showSnackBar(snackBar);
+              });
             }
 
             return SafeArea(
@@ -70,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
   List<Widget> _form() {
     return [
       TextFormField(
+        autocorrect: false,
         controller: hostInputController,
         decoration: InputDecoration(
             border: OutlineInputBorder(
@@ -84,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
         height: 10,
       ),
       TextFormField(
+        autocorrect: false,
         controller: tokenInputController,
         decoration: InputDecoration(
             border: OutlineInputBorder(

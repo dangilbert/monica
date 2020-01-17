@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import 'package:get_it/get_it.dart';
+import 'package:monica/auth/session.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
+import 'package:monica/service/navigation_service.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -45,7 +48,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (_currentPage == null) {
-      _currentPage = NewPage(I18n.of(context).appScreenDashboard); 
+      _currentPage = NewPage(I18n.of(context).appScreenDashboard);
     }
     return new Scaffold(
         key: _scaffoldKey,
@@ -142,52 +145,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       FadeTransition(
                         opacity: _drawerContentsOpacity,
                         child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ListTile(
-                              leading: Icon(Icons.dashboard),
-                              title: Text(I18n.of(context).appScreenDashboard),
-                              onTap: () => setState(() {
-                                _currentPage = NewPage(
-                                    I18n.of(context).appScreenDashboard);
-                                Navigator.pop(context);
-                              }),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.contacts),
-                              title: Text('Contacts'),
-                              onTap: () => setState(() {
-                                _currentPage = NewPage("Contacts");
-                                Navigator.pop(context);
-                              }),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.photo_library),
-                              title: Text('Photo Gallery'),
-                              onTap: () => setState(() {
-                                _currentPage = NewPage("Photo Gallery");
-                                Navigator.pop(context);
-                              }),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.note),
-                              title: Text('Journal'),
-                              onTap: () => setState(() {
-                                _currentPage = NewPage("Journal");
-                                Navigator.pop(context);
-                              }),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.settings),
-                              title: Text('Settings'),
-                              onTap: () => setState(() {
-                                _currentPage = NewPage("Settings");
-                                Navigator.pop(context);
-                              }),
-                            ),
-                          ],
-                        ),
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: _drawerItems()),
                       ),
                       // The drawer's "details" view.
                       SlideTransition(
@@ -222,4 +182,57 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
   }
+
+  List<Widget> _drawerItems() => [
+        ListTile(
+          leading: Icon(Icons.dashboard),
+          title: Text(I18n.of(context).appScreenDashboard),
+          onTap: () => setState(() {
+            _currentPage = NewPage(I18n.of(context).appScreenDashboard);
+            Navigator.pop(context);
+          }),
+        ),
+        ListTile(
+          leading: Icon(Icons.contacts),
+          title: Text('Contacts'),
+          onTap: () => setState(() {
+            _currentPage = NewPage("Contacts");
+            Navigator.pop(context);
+          }),
+        ),
+        ListTile(
+          leading: Icon(Icons.photo_library),
+          title: Text('Photo Gallery'),
+          onTap: () => setState(() {
+            _currentPage = NewPage("Photo Gallery");
+            Navigator.pop(context);
+          }),
+        ),
+        ListTile(
+          leading: Icon(Icons.note),
+          title: Text('Journal'),
+          onTap: () => setState(() {
+            _currentPage = NewPage("Journal");
+            Navigator.pop(context);
+          }),
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap: () => setState(() {
+            _currentPage = NewPage("Settings");
+            Navigator.pop(context);
+          }),
+        ),
+        ListTile(
+          leading: Icon(Icons.exit_to_app),
+          title: Text('Logout'),
+          onTap: () async {
+            // TODO add a bloc for this screen to handle logout
+            SessionRepo sessionRepo = GetIt.instance.get();
+            await sessionRepo.logout();
+            Navigator.of(context).pushReplacementNamed(Routes.Login);
+          }
+        ),
+      ];
 }

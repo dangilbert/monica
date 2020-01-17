@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:monica/i18n.dart';
+import 'package:monica/core/networking/client.dart';
 import 'package:monica/service/navigation_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:verbal_expressions/verbal_expressions.dart';
 
 class LoginBloc {
-
   NavigationService _navigationService = GetIt.instance.get();
+  MonicaClient _client = GetIt.instance.get();
 
   StreamController _effect = StreamController<LoginBlocViewEffect>();
   StreamController _loading = StreamController<bool>();
@@ -25,20 +26,40 @@ class LoginBloc {
     _loading.close();
   }
 
-  handleAction(LoginBlocViewAction action) async {
+  handleAction(LoginBlocViewAction action) {
     switch (action.runtimeType) {
       case LoginTappedViewAction:
-        LoginTappedViewAction tapAction = action;
-        _loading.add(true);
-        await Future.delayed(Duration(seconds: 2));
-        if (tapAction.host == "test") {
-          _navigationService.navigateToReplacing(Routes.Home);
-        } else {
-          _effect.add(LoginBlocInvalidHostError());
-        }
-        _loading.add(false);
+        _handleLoginAttempt(action);
         break;
     }
+  }
+
+  void _handleLoginAttempt(LoginBlocViewAction action) async {
+    LoginTappedViewAction tapAction = action;
+    _loading.add(true);
+    if (_isValidDomain(tapAction.host)) {
+      var result = await _client.login(host: tapAction.host, token: tapAction.token);
+      if (result) {
+        _navigationService.navigateToReplacing(Routes.Home);
+      } else {
+        _effect.add(LoginBlocConnectionFailedError());
+      }
+    } else {
+      _effect.add(LoginBlocInvalidHostError());
+    }
+    _loading.add(false);
+  }
+
+  bool _isValidDomain(String host) {
+    var regex = VerbalExpression()
+      ..startOfLine()
+      ..then("http")..maybe("s")
+      ..then("://")
+      ..maybe("www.")
+      ..anythingBut(" ")
+      ..endOfLine();
+
+      return regex.hasMatch(host);
   }
 }
 
@@ -49,9 +70,9 @@ class LoginBlocViewState {
 }
 
 class LoginBlocViewEffect {}
-
 class LoginBlocInvalidHostError extends LoginBlocViewEffect {}
 class LoginBlocInvalidTokenError extends LoginBlocViewEffect {}
+class LoginBlocConnectionFailedError extends LoginBlocViewEffect {}
 
 class LoginBlocViewAction {}
 

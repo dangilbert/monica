@@ -1,3 +1,5 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:monica/auth/session.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
 import 'package:flutter/foundation.dart';
@@ -6,12 +8,15 @@ import 'package:monica/home/home_screen.dart';
 import 'package:monica/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:get_it/get_it.dart';
+import 'core/networking/client.dart';
 import 'service/navigation_service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-
+  GetIt.instance.registerSingleton(FlutterSecureStorage());
   GetIt.instance.registerSingleton(NavigationService());
+  GetIt.instance.registerSingleton(SessionRepo());
+  GetIt.instance.registerSingleton(MonicaClient());
 
   return runApp(MyApp());
 }
@@ -62,8 +67,11 @@ class MyApp extends StatelessWidget {
         outputAndHome: _returnValueAndHomeScreen,
       ),
       onGenerateRoute: (RouteSettings settings) {
-        if (settings.name == Routes.Home) {
-          return MaterialPageRoute(builder: (_) => HomePage());
+        switch (settings.name) {
+          case Routes.Home:
+            return MaterialPageRoute(builder: (_) => HomePage());
+          case Routes.Login:
+            return MaterialPageRoute(fullscreenDialog: true, builder: (_) => LoginPage());
         }
         var page = settings.name.startsWith('/page/')
             ? NewPage(settings.name.substring(6))
@@ -74,9 +82,8 @@ class MyApp extends StatelessWidget {
   }
 
   Future<int> _checkLogin() async {
-    print("Doing stuff on init");
-    await Future.delayed(Duration(seconds: 3));
-    print("Finished waiting");
-    return 2;
+    MonicaClient client = GetIt.instance.get();
+    var sessionValid = await client.sessionIsValid();
+    return sessionValid ? 1 : 2;
   }
 }

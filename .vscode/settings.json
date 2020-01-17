@@ -1,0 +1,12 @@
+{
+    "filewatcher.commands": [
+        {
+            "shell": "zsh",
+            "match": "\\localization.csv",
+            "isAsync": true,
+            "cmd": "cd ${workspaceRoot} && fvm flutter pub run flappy_translator",
+            "event": "onFileChange"
+        }
+    ],
+    "lcov.path": "coverage/lcov.info"
+}

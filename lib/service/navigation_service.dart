@@ -19,6 +19,6 @@ class NavigationService {
 }
 
 class Routes {
-  static final String Home = "/home";
-  static final String Login = "/login";
+  static const String Home = "/home";
+  static const String Login = "/login";
 }

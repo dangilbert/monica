@@ -13,6 +13,11 @@ class I18n {
 
   String get loginErrorHostnameInvalid => _getText("loginErrorHostnameInvalid");
 
+  String get appScreenContacts => _getText("appScreenContacts");
+
+  String get loginErrorConnectionFailed =>
+      _getText("loginErrorConnectionFailed");
+
   static Map<String, String> _localizedValues;
 
   static Map<String, String> _enValues = {
@@ -20,6 +25,9 @@ class I18n {
     "loginHostName": "Monica Host",
     "loginApiToken": "API Token",
     "loginErrorHostnameInvalid": "Whoops! The hostname appears to be invalid",
+    "appScreenContacts": "Contacts",
+    "loginErrorConnectionFailed":
+        "Looks like something went wrong. Check your internet connection and API Key",
   };
 
   static Map<String, String> _esValues = {
@@ -28,6 +36,9 @@ class I18n {
     "loginApiToken": "Token de la API",
     "loginErrorHostnameInvalid":
         "¡Uyyy! El nombre del servidor parece incorrecto",
+    "appScreenContacts": "Contacto",
+    "loginErrorConnectionFailed":
+        "Looks like something went wrong. Check your internet connection and API Key",
   };
 
   static Map<String, Map<String, String>> _allValues = {
