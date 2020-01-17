@@ -1,5 +1,5 @@
-name: circleci_flutter
-description: A new Flutter project.
+name: monica
+description: An app to consume the Monica API.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -22,7 +22,6 @@ dependencies:
   custom_splash:
     git:
       url: git://github.com/fjmorant/custom_splash.git
-  flutter_bloc: ^3.1.0
   get_it: ^3.1.0
 
 

@@ -1,10 +1,8 @@
-import 'dart:io';
-
-import 'package:circleci_flutter/new_page.dart';
+import 'package:monica/new_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:circleci_flutter/home/home_screen.dart';
-import 'package:circleci_flutter/login/login_page.dart';
+import 'package:monica/home/home_screen.dart';
+import 'package:monica/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:get_it/get_it.dart';
 import 'service/navigation_service.dart';
@@ -68,7 +66,7 @@ class MyApp extends StatelessWidget {
 
   Future<int> _checkLogin() async {
     print("Doing stuff on init");
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
     print("Finished waiting");
     return 2;
   }

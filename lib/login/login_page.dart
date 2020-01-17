@@ -1,6 +1,5 @@
-import 'package:circleci_flutter/login/bloc/bloc.dart';
+import 'package:monica/login/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -20,40 +19,50 @@ class _LoginPageState extends State<LoginPage> {
     // Clean up the controller when the widget is disposed.
     hostInputController.dispose();
     tokenInputController.dispose();
+    _bloc.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Image(
-                    image: AssetImage("assets/images/monica.png"),
+      body: StreamBuilder<LoginBlocViewEffect>(
+          stream: _bloc.effect,
+          builder: (context, effect) {
+            
+            if (effect.hasData && effect.data is LoginBlocError) {
+              LoginBlocError error = effect.data;
+              final snackBar = SnackBar(content: Text(error.message));
+              WidgetsBinding.instance.addPostFrameCallback((duration) {
+                Scaffold.of(context).showSnackBar(snackBar);
+              });
+            }
+
+            return SafeArea(
+              child: Container(
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage("assets/images/monica.png"),
+                        ),
+                        StreamBuilder<bool>(
+                            stream: _bloc.viewState.loading,
+                            builder: (context, loading) {
+                              if (loading.hasData && loading.data) {
+                                return CircularProgressIndicator();
+                              } else {
+                                return Column(children: _form());
+                              }
+                            }),
+                      ],
+                    ),
                   ),
-                  BlocBuilder(
-                      bloc: _bloc,
-                      builder: (context, state) {
-                        if (state is InitialLoginState) {
-                          return Column(children: _form());
-                        } else if (state is LoginLoadingState) {
-                          return CircularProgressIndicator();
-                        } else if (state is LoginErrorState) {
-                          return Column(children: _form());
-                        } else {
-                          throw Error();
-                        }
-                      }),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
+            );
+          }),
     );
   }
 
@@ -90,7 +99,8 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: new BorderRadius.circular(5.0),
         ),
         onPressed: () {
-          _bloc.add(LoginTapped("test", "test"));
+          _bloc.handleAction(LoginTappedViewAction(
+              hostInputController.text, tokenInputController.text));
         },
       )
     ];
