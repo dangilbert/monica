@@ -1,0 +1,5 @@
+keys,en,es
+appScreenDashboard,Dashboard,Panel de inicio
+loginHostName,Monica Host,Servidor de Monica
+loginApiToken,API Token,Token de la API
+loginErrorHostnameInvalid,Whoops! The hostname appears to be invalid,¡Uyyy! El nombre del servidor parece incorrecto

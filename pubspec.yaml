@@ -19,6 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_cupertino_localizations: ^1.0.1
   custom_splash:
     git:
       url: git://github.com/fjmorant/custom_splash.git
@@ -32,6 +35,18 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flappy_translator: ^1.2.0
+
+flappy_translator:
+  input_file_path: "localization.csv"
+  output_dir: "lib"
+  file_name: "i18n"
+  class_name: "I18n"
+  delimiter: ","
+  start_index: 1
+  depend_on_context: true
+  use_single_quotes: false
+  replace_no_break_spaces: false
 
 
 

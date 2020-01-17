@@ -1,3 +1,4 @@
+import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:monica/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:get_it/get_it.dart';
 import 'service/navigation_service.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
 
@@ -28,6 +30,13 @@ class MyApp extends StatelessWidget {
 
     return new MaterialApp(
       navigatorKey: navigationService.navigatorKey,
+      localizationsDelegates: [
+        const I18nDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: I18nDelegate.supportedLocals,
       theme: ThemeData(
           primarySwatch: Colors.blue,
           primaryColor: defaultTargetPlatform == TargetPlatform.iOS
@@ -66,7 +75,7 @@ class MyApp extends StatelessWidget {
 
   Future<int> _checkLogin() async {
     print("Doing stuff on init");
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 3));
     print("Finished waiting");
     return 2;
   }

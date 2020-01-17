@@ -1,3 +1,4 @@
+import 'package:monica/i18n.dart';
 import 'package:monica/login/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -30,9 +31,8 @@ class _LoginPageState extends State<LoginPage> {
           stream: _bloc.effect,
           builder: (context, effect) {
             
-            if (effect.hasData && effect.data is LoginBlocError) {
-              LoginBlocError error = effect.data;
-              final snackBar = SnackBar(content: Text(error.message));
+            if (effect.hasData && effect.data is LoginBlocInvalidHostError) {
+              final snackBar = SnackBar(content: Text(I18n.of(context).loginErrorHostnameInvalid));
               WidgetsBinding.instance.addPostFrameCallback((duration) {
                 Scaffold.of(context).showSnackBar(snackBar);
               });
@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
 
             return SafeArea(
               child: Container(
+                constraints: BoxConstraints.expand(),
                 child: SingleChildScrollView(
                   child: Center(
                     child: Column(
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               borderRadius: BorderRadius.circular(10.0),
             ),
-            labelText: 'Monica host name'),
+            labelText: I18n.of(context).loginHostName),
       ),
       SizedBox(
         height: 10,
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               borderRadius: BorderRadius.circular(10.0),
             ),
-            labelText: 'API token'),
+            labelText: I18n.of(context).loginApiToken),
       ),
       RaisedButton(
         child: Text("Login"),

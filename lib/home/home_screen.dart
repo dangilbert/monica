@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Widget _currentPage = NewPage("Dashboard");
-  Map<String, Widget> _drawerContents;
 
   static final Animatable<Offset> _drawerDetailsTween = Tween<Offset>(
     begin: const Offset(0.0, -1.0),
@@ -40,53 +40,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       curve: Curves.fastOutSlowIn,
     );
     _drawerDetailsPosition = _controller.drive(_drawerDetailsTween);
-
-    _drawerContents = <String, Widget>{
-      'dashboard': ListTile(
-        leading: Icon(Icons.dashboard),
-        title: Text('Dashboard'),
-        onTap: () => setState(() {
-          _currentPage = NewPage("Dashboard");
-          Navigator.pop(context);
-        }),
-      ),
-      'contacts': ListTile(
-        leading: Icon(Icons.contacts),
-        title: Text('Contacts'),
-        onTap: () => setState(() {
-          _currentPage = NewPage("Contacts");
-          Navigator.pop(context);
-        }),
-      ),
-      'gallery': ListTile(
-        leading: Icon(Icons.photo_library),
-        title: Text('Photo Gallery'),
-        onTap: () => setState(() {
-          _currentPage = NewPage("Photo Gallery");
-          Navigator.pop(context);
-        }),
-      ),
-      'journal': ListTile(
-        leading: Icon(Icons.note),
-        title: Text('Journal'),
-        onTap: () => setState(() {
-          _currentPage = NewPage("Journal");
-          Navigator.pop(context);
-        }),
-      ),
-      'settings': ListTile(
-        leading: Icon(Icons.settings),
-        title: Text('Settings'),
-        onTap: () => setState(() {
-          _currentPage = NewPage("Settings");
-          Navigator.pop(context);
-        }),
-      ),
-    };
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_currentPage == null) {
+      _currentPage = NewPage(I18n.of(context).appScreenDashboard); 
+    }
     return new Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
@@ -105,10 +65,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _scaffoldKey.currentState.showSnackBar(const SnackBar(
       content: Text("The drawer's items don't do anything"),
     ));
-  }
-
-  void _navigateToPage(String id) {
-    Navigator.popAndPushNamed(context, "/page/$id");
   }
 
   void _onOtherAccountsTap(BuildContext context) {
@@ -188,7 +144,49 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: _drawerContents.values.toList(),
+                          children: [
+                            ListTile(
+                              leading: Icon(Icons.dashboard),
+                              title: Text(I18n.of(context).appScreenDashboard),
+                              onTap: () => setState(() {
+                                _currentPage = NewPage(
+                                    I18n.of(context).appScreenDashboard);
+                                Navigator.pop(context);
+                              }),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.contacts),
+                              title: Text('Contacts'),
+                              onTap: () => setState(() {
+                                _currentPage = NewPage("Contacts");
+                                Navigator.pop(context);
+                              }),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.photo_library),
+                              title: Text('Photo Gallery'),
+                              onTap: () => setState(() {
+                                _currentPage = NewPage("Photo Gallery");
+                                Navigator.pop(context);
+                              }),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.note),
+                              title: Text('Journal'),
+                              onTap: () => setState(() {
+                                _currentPage = NewPage("Journal");
+                                Navigator.pop(context);
+                              }),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.settings),
+                              title: Text('Settings'),
+                              onTap: () => setState(() {
+                                _currentPage = NewPage("Settings");
+                                Navigator.pop(context);
+                              }),
+                            ),
+                          ],
                         ),
                       ),
                       // The drawer's "details" view.
