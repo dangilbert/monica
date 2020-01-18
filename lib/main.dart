@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:monica/auth/session.dart';
+import 'package:monica/core/networking/user_request.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
 import 'package:flutter/foundation.dart';
@@ -8,16 +9,13 @@ import 'package:monica/home/home_screen.dart';
 import 'package:monica/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:get_it/get_it.dart';
+import 'package:monica/user/user_repo.dart';
 import 'core/networking/client.dart';
 import 'service/navigation_service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  GetIt.instance.registerSingleton(FlutterSecureStorage());
-  GetIt.instance.registerSingleton(NavigationService());
-  GetIt.instance.registerSingleton(SessionRepo());
-  GetIt.instance.registerSingleton(MonicaClient());
-
+  _initDependencyGraph();
   return runApp(MyApp());
 }
 
@@ -86,4 +84,13 @@ class MyApp extends StatelessWidget {
     var sessionValid = await client.sessionIsValid();
     return sessionValid ? 1 : 2;
   }
+}
+
+void _initDependencyGraph() {
+  GetIt.instance.registerSingleton(FlutterSecureStorage());
+  GetIt.instance.registerSingleton(NavigationService());
+
+  MonicaClient client = MonicaClient(sessionRepo: SessionRepo());
+  GetIt.instance.registerSingleton(client);
+  GetIt.instance.registerSingleton(UserRequest(client: client));
 }

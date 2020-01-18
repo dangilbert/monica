@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:monica/auth/session.dart';
 import 'package:monica/core/networking/api_health.dart';
 import 'dart:convert';
@@ -10,10 +11,12 @@ import 'dart:convert';
 class MonicaClient {
   var client = http.Client();
 
-  SessionRepo _sessionRepo = GetIt.instance.get();
+  SessionRepo sessionRepo;
+
+  MonicaClient({@required this.sessionRepo});
 
   Future<bool> sessionIsValid() async {
-    var session = await _sessionRepo.getSession();
+    var session = await sessionRepo.getSession();
     if (session == null) {
       return false;
     }
@@ -25,7 +28,7 @@ class MonicaClient {
   Future<bool> login({String host, String token}) async {
     var result = await _canConnect(host: host, token: token);
     if (result) {
-      _sessionRepo.setSession(Session(host: host, token: token));
+      sessionRepo.setSession(Session(host: host, token: token));
     }
     return result;
   }
@@ -42,5 +45,14 @@ class MonicaClient {
       }
     } catch (err) {}
     return false;
+  }
+
+  Future<Response> get(String path, {Map<String, String> headers}) async{
+    var session = await sessionRepo.getSession();
+    if (headers == null) {
+      headers = {};
+    }
+    headers[HttpHeaders.authorizationHeader] = "Bearer ${session.token}";
+    return await client.get("${session.host}/api/$path", headers: headers);
   }
 }

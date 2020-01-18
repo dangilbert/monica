@@ -30,14 +30,16 @@ class _LoginPageState extends State<LoginPage> {
       body: StreamBuilder<LoginBlocViewEffect>(
           stream: _bloc.effect,
           builder: (context, effect) {
-            
             if (effect.hasData && effect.data is LoginBlocInvalidHostError) {
-              final snackBar = SnackBar(content: Text(I18n.of(context).loginErrorHostnameInvalid));
+              final snackBar = SnackBar(
+                  content: Text(I18n.of(context).loginErrorHostnameInvalid));
               WidgetsBinding.instance.addPostFrameCallback((duration) {
                 Scaffold.of(context).showSnackBar(snackBar);
               });
-            } else if (effect.hasData && effect.data is LoginBlocConnectionFailedError) {
-              final snackBar = SnackBar(content: Text(I18n.of(context).loginErrorConnectionFailed));
+            } else if (effect.hasData &&
+                effect.data is LoginBlocConnectionFailedError) {
+              final snackBar = SnackBar(
+                  content: Text(I18n.of(context).loginErrorConnectionFailed));
               WidgetsBinding.instance.addPostFrameCallback((duration) {
                 Scaffold.of(context).showSnackBar(snackBar);
               });
@@ -84,7 +86,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               borderRadius: BorderRadius.circular(10.0),
             ),
-            labelText: I18n.of(context).loginHostName),
+            labelText: I18n.of(context).loginHostName,
+            hintText: "https://app.monicahq.com"),
       ),
       SizedBox(
         height: 10,

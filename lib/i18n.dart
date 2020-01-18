@@ -18,6 +18,8 @@ class I18n {
   String get loginErrorConnectionFailed =>
       _getText("loginErrorConnectionFailed");
 
+  String get coreLoading => _getText("coreLoading");
+
   static Map<String, String> _localizedValues;
 
   static Map<String, String> _enValues = {
@@ -28,6 +30,7 @@ class I18n {
     "appScreenContacts": "Contacts",
     "loginErrorConnectionFailed":
         "Looks like something went wrong. Check your internet connection and API Key",
+    "coreLoading": "Loading",
   };
 
   static Map<String, String> _esValues = {
@@ -39,6 +42,7 @@ class I18n {
     "appScreenContacts": "Contacto",
     "loginErrorConnectionFailed":
         "Looks like something went wrong. Check your internet connection and API Key",
+    "coreLoading": "Cargando",
   };
 
   static Map<String, Map<String, String>> _allValues = {
