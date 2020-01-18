@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           elevation:
               defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
         ),
-        drawer: MonicaDrawer(scaffoldKey: _scaffoldKey, pageCallback: (page) { _changePage(page); }),
+        drawer: MonicaDrawer(pageCallback: (page) { _changePage(page); }),
         body: new Container(
           child: _currentPage,
         ));
