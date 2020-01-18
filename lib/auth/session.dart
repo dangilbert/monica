@@ -7,8 +7,8 @@ import 'package:get_it/get_it.dart';
 
 class Session extends Equatable {
   
-  String host;
-  String token;
+  final String host;
+  final String token;
 
   Session({ @required this.host, @required this.token });
 
