@@ -4,6 +4,7 @@ import 'package:monica/core/networking/client.dart';
 import 'package:monica/service/navigation_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:verbal_expressions/verbal_expressions.dart';
+import 'package:equatable/equatable.dart';
 
 class LoginBloc {
   NavigationService _navigationService = GetIt.instance.get();
@@ -69,10 +70,15 @@ class LoginBlocViewState {
   final Stream<bool> loading;
 }
 
-class LoginBlocViewEffect {}
-class LoginBlocInvalidHostError extends LoginBlocViewEffect {}
-class LoginBlocInvalidTokenError extends LoginBlocViewEffect {}
-class LoginBlocConnectionFailedError extends LoginBlocViewEffect {}
+abstract class LoginBlocViewEffect extends Equatable {}
+class LoginBlocInvalidHostError extends LoginBlocViewEffect {
+  @override
+  List<Object> get props => [];
+}
+class LoginBlocConnectionFailedError extends LoginBlocViewEffect {
+  @override
+  List<Object> get props => [];
+}
 
 class LoginBlocViewAction {}
 

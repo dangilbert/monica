@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:monica/auth/session.dart';
@@ -33,11 +32,10 @@ class MonicaClient {
     return result;
   }
 
-  Future<bool> _canConnect({@required String host, @required String token}) async {
-    var result = await client.get(
-      "$host/api",
-      headers: {HttpHeaders.authorizationHeader: "Bearer $token"}
-      );
+  Future<bool> _canConnect(
+      {@required String host, @required String token}) async {
+    var result = await client.get("$host/api",
+        headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
     try {
       var apiHealth = ApiHealth.fromJson(jsonDecode(result.body));
       if (apiHealth.success != null) {
@@ -47,7 +45,7 @@ class MonicaClient {
     return false;
   }
 
-  Future<Response> get(String path, {Map<String, String> headers}) async{
+  Future<Response> get(String path, {Map<String, String> headers}) async {
     var session = await sessionRepo.getSession();
     if (headers == null) {
       headers = {};

@@ -1,29 +1,41 @@
 
+import 'dart:async';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/navigator.dart';
 import 'package:monica/service/navigation_service.dart';
 
 class FakeNavigationService implements NavigationService {
+
+  StreamController<String> _routes = StreamController();
+  Stream<String> routes;
+
+  FakeNavigationService() {
+    routes = _routes.stream;
+  }
+
+  void dispose() {
+    _routes.close();
+  }
+
   @override
   bool goBack() {
-    // TODO: implement goBack
     return null;
   }
 
   @override
   Future navigateTo(String routeName, {arguments}) {
-    // TODO: implement navigateTo
+    _routes.add(routeName);
     return null;
   }
 
   @override
   Future navigateToReplacing(String routeName, {arguments}) {
-    // TODO: implement navigateToReplacing
+    _routes.add(routeName);
     return null;
   }
 
   @override
-  // TODO: implement navigatorKey
   GlobalKey<NavigatorState> get navigatorKey => null;
 
 }
