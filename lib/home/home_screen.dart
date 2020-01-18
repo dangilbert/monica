@@ -1,12 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart' show DragStartBehavior;
-import 'package:get_it/get_it.dart';
-import 'package:monica/auth/session.dart';
 import 'package:monica/home/drawer.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
-import 'package:monica/service/navigation_service.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);

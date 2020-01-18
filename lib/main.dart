@@ -9,7 +9,6 @@ import 'package:monica/home/home_screen.dart';
 import 'package:monica/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:get_it/get_it.dart';
-import 'package:monica/user/user_repo.dart';
 import 'core/networking/client.dart';
 import 'service/navigation_service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
