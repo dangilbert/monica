@@ -35,7 +35,7 @@ class SessionRepo {
   }
 
   Future<void> logout() async {
-    _storage.deleteAll();
+    await _storage.deleteAll();
   }
 
 }

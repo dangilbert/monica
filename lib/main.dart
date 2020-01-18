@@ -89,8 +89,9 @@ class MyApp extends StatelessWidget {
 void _initDependencyGraph() {
   GetIt.instance.registerSingleton(FlutterSecureStorage());
   GetIt.instance.registerSingleton(NavigationService());
-
-  MonicaClient client = MonicaClient(sessionRepo: SessionRepo());
+  SessionRepo sessionRepo = SessionRepo();
+  GetIt.instance.registerSingleton(sessionRepo);
+  MonicaClient client = MonicaClient(sessionRepo: sessionRepo);
   GetIt.instance.registerSingleton(client);
   GetIt.instance.registerSingleton(UserRequest(client: client));
 }
