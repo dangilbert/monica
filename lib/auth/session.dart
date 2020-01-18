@@ -1,15 +1,19 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
-class Session {
+class Session extends Equatable {
   
   String host;
   String token;
 
   Session({ @required this.host, @required this.token });
+
+  @override
+  List<Object> get props => [host, token];
 }
 
 class SessionRepo {
