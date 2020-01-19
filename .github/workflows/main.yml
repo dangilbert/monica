@@ -95,7 +95,7 @@ jobs:
         run: ./.github/scripts/decrypt_secret.sh
         env:
           ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE: ${{ secrets.ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE }}
-          KEY_PROPERTIES_SECRET_PASSPHRASE: $({ secrets.KEY_PROPERTIES_SECRET_PASSPHRASE })
+          KEY_PROPERTIES_SECRET_PASSPHRASE: ${{ secrets.KEY_PROPERTIES_SECRET_PASSPHRASE }}
       - run: echo $GITHUB_WORKSPACE
       - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
       - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
