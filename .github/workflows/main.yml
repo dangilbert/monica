@@ -100,15 +100,6 @@ jobs:
       - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
       - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
       - run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64
-
-  codesign_deploy:
-    #if conditional to prevent a job from running
-    if: github.event_name != 'pull_request'
-    runs-on: macos-latest
-    #Identifies any jobs that must complete successfully before this job will run.
-    needs: [build_release]
-    name: Sign and deploy the ipa and app bundle
-    steps:
       - name: Fastlane Deploy Android Internal
         uses: maierj/fastlane-action@v1.2.0
         with:
