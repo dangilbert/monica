@@ -100,13 +100,6 @@ jobs:
       - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
       - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
       - run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64
-      # This action will create a github release and optionally upload an artifact to it.
-      # https://github.com/ncipollo/release-action
-      - name: Create a Release App Bundle
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/bundle/release/app-release.aab,"
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   codesign_deploy:
     #if conditional to prevent a job from running
@@ -125,12 +118,12 @@ jobs:
           subdirectory: android
           # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
           skip-tracking: true
-      - name: Fastlane Deploy iOS Testflight
-        uses: maierj/fastlane-action@v1.2.0
-        with:
-          # The lane that should be executed.
-          lane: beta
-          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
-          subdirectory: ios
-          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
-          skip-tracking: true
+      # - name: Fastlane Deploy iOS Testflight
+      #   uses: maierj/fastlane-action@v1.2.0
+      #   with:
+      #     # The lane that should be executed.
+      #     lane: beta
+      #     # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+      #     subdirectory: ios
+      #     # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+      #     skip-tracking: true
