@@ -111,11 +111,11 @@ jobs:
       #     subdirectory: android
       #     # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
       #     skip-tracking: true
-      - run: sed -i'.original' -e 's/MATCH_GIT_BASIC_AUTH/'"${{ secrets.MATCH_GIT_BASIC_AUTH }}"'/g' ios/fastlane/Matchfile
       - name: Fastlane Deploy iOS Testflight
         uses: maierj/fastlane-action@v1.2.0
         env:
-          MATCH_PASSWORD: password
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         with:
           # The lane that should be executed.
           lane: beta

@@ -17,8 +17,15 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    match
+    match(git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
     upload_to_testflight
+  end
+end
+
+platform :ios do
+  desc "Run match with envvars"
+  lane :matching do
+    match(git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], )
   end
 end

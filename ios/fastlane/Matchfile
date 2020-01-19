@@ -1,5 +1,4 @@
 
-git_basic_authorization("MATCH_GIT_BASIC_AUTH")
 git_url("https://github.com/dangilbert/monicasigning.git")
 
 storage_mode("git")
