@@ -12,7 +12,6 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: macos-latest
     steps:
-      - run: echo ${{ secrets.MATCH_PASSWORD }}
       - name: 'Set build id'
         id: build_id
         # add a step output `steps.build_id.outputs.id` as the unique id
