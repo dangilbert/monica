@@ -97,7 +97,7 @@ jobs:
       - name: Create a Release App Bundle
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ""
+          artifacts: "build/app/outputs/bundle/release/app-release.aab,"
           token: ${{ secrets.GITHUB_TOKEN }}
 
   codesign_deploy:
