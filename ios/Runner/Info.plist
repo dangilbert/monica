@@ -46,6 +46,7 @@
 			<string>en</string>
 			<string>es</string>
 		</array>
-
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
 	</dict>
 </plist>
