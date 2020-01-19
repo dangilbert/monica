@@ -26,6 +26,6 @@ end
 platform :ios do
   desc "Run match with envvars"
   lane :matching do
-    match(git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], )
+    match(git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], verbose: true)
   end
 end
