@@ -115,7 +115,7 @@ jobs:
       - name: Fastlane Deploy iOS Testflight
         uses: maierj/fastlane-action@v1.2.0
         env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_PASSWORD: password
         with:
           # The lane that should be executed.
           lane: beta
