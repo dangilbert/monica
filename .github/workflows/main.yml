@@ -111,12 +111,13 @@ jobs:
           subdirectory: android
           # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
           skip-tracking: true
-      # - name: Fastlane Deploy iOS Testflight
-      #   uses: maierj/fastlane-action@v1.2.0
-      #   with:
-      #     # The lane that should be executed.
-      #     lane: beta
-      #     # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
-      #     subdirectory: ios
-      #     # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
-      #     skip-tracking: true
+      - run: sed -i 's/MATCH_GIT_BASIC_AUTH/'"${{ secrets.MATCH_GIT_BASIC_AUTH }}"'/g' ios/fastlane/Matchfile
+      - name: Fastlane Deploy iOS Testflight
+        uses: maierj/fastlane-action@v1.2.0
+        with:
+          # The lane that should be executed.
+          lane: beta
+          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+          subdirectory: ios
+          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+          skip-tracking: true
