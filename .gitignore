@@ -91,3 +91,5 @@ key.jks
 
 *.ipa
 *.dSYM.zip
+
+google-play-service.json

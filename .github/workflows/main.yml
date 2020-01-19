@@ -96,9 +96,11 @@ jobs:
         env:
           ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE: ${{ secrets.ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE }}
           KEY_PROPERTIES_SECRET_PASSPHRASE: ${{ secrets.KEY_PROPERTIES_SECRET_PASSPHRASE }}
+          GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE }}
       - run: echo $GITHUB_WORKSPACE
       - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
       - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
+      - run: mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
       - run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64
       - name: Fastlane Deploy Android Internal
         uses: maierj/fastlane-action@v1.2.0
