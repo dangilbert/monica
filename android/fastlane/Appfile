@@ -1,2 +1,2 @@
-json_key_file("~/Downloads/api-9144695505741582077-322047-4ed10b8db023.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+json_key_file("google-play-service.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
 package_name("eu.dangilbert.monica") # e.g. com.krausefx.app
