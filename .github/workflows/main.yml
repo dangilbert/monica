@@ -90,28 +90,28 @@ jobs:
       - run: flutter pub get
       # build iOS desktop version
       - run: flutter build ios --release --no-codesign
-      # build Android version
-      - name: Decrypt signing key
-        run: ./.github/scripts/decrypt_secret.sh
-        env:
-          ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE: ${{ secrets.ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE }}
-          KEY_PROPERTIES_SECRET_PASSPHRASE: ${{ secrets.KEY_PROPERTIES_SECRET_PASSPHRASE }}
-          GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE }}
-      - run: echo $GITHUB_WORKSPACE
-      - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
-      - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
-      - run: mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
-      - run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64
-      - name: Fastlane Deploy Android Internal
-        uses: maierj/fastlane-action@v1.2.0
-        with:
-          # The lane that should be executed.
-          lane: internal
-          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
-          subdirectory: android
-          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
-          skip-tracking: true
-      - run: sed -i 's/MATCH_GIT_BASIC_AUTH/'"${{ secrets.MATCH_GIT_BASIC_AUTH }}"'/g' ios/fastlane/Matchfile
+      # # build Android version
+      # - name: Decrypt signing key
+      #   run: ./.github/scripts/decrypt_secret.sh
+      #   env:
+      #     ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE: ${{ secrets.ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE }}
+      #     KEY_PROPERTIES_SECRET_PASSPHRASE: ${{ secrets.KEY_PROPERTIES_SECRET_PASSPHRASE }}
+      #     GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE }}
+      # - run: echo $GITHUB_WORKSPACE
+      # - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
+      # - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
+      # - run: mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
+      # - run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64
+      # - name: Fastlane Deploy Android Internal
+      #   uses: maierj/fastlane-action@v1.2.0
+      #   with:
+      #     # The lane that should be executed.
+      #     lane: internal
+      #     # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+      #     subdirectory: android
+      #     # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+      #     skip-tracking: true
+      - run: sed -i'.original' -e 's/MATCH_GIT_BASIC_AUTH/'"${{ secrets.MATCH_GIT_BASIC_AUTH }}"'/g' ios/fastlane/Matchfile
       - name: Fastlane Deploy iOS Testflight
         uses: maierj/fastlane-action@v1.2.0
         with:
