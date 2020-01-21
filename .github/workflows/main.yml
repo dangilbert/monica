@@ -114,12 +114,12 @@ jobs:
       - name: Archive android app bundle
         uses: actions/upload-artifact@v1
         with:
-          name: santa-`cat .build-id/id`-release.aab
+          name: santa-release.aab
           path: build/app/outputs/bundle/release/app-release.aab
       - name: Archive iOS app
         uses: actions/upload-artifact@v1
         with:
-          name: santa-`cat .build-id/id`-release-unsigned.app
+          name: santa-release-unsigned.app
           path: build/ios/iphoneos/Runner.app
       # - name: Fastlane Deploy iOS Testflight
       #   uses: maierj/fastlane-action@v1.2.0
