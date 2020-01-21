@@ -121,15 +121,15 @@ jobs:
         with:
           name: santa-release-unsigned.app
           path: build/ios/iphoneos/Runner.app
-      # - name: Fastlane Deploy iOS Testflight
-      #   uses: maierj/fastlane-action@v1.2.0
-      #   env:
-      #     MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
-      #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-      #   with:
-      #     # The lane that should be executed.
-      #     lane: beta
-      #     # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
-      #     subdirectory: ios
-      #     # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
-      #     skip-tracking: true
+      - name: Fastlane Deploy iOS Testflight
+        uses: maierj/fastlane-action@v1.2.0
+        env:
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        with:
+          # The lane that should be executed.
+          lane: beta
+          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+          subdirectory: ios
+          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+          skip-tracking: true
