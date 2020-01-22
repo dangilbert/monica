@@ -18,7 +18,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     match(git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], readonly: true)
-    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+    build_ios_app(workspace: "Runner.xcworkspace", scheme: "Runner", export_method: "app-store")
     upload_to_testflight
   end
 end
