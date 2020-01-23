@@ -7,6 +7,8 @@ import 'package:monica/auth/session.dart';
 import 'package:monica/core/networking/api_health.dart';
 import 'dart:convert';
 
+import 'package:monica/core/networking/binary_result.dart';
+
 class MonicaClient {
   var client = http.Client();
 
@@ -25,11 +27,15 @@ class MonicaClient {
   }
 
   Future<bool> login({String host, String token}) async {
-    var result = await _canConnect(host: host, token: token);
-    if (result) {
-      sessionRepo.setSession(Session(host: host, token: token));
+    try {
+      var result = await _canConnect(host: host, token: token);
+      if (result) {
+        sessionRepo.setSession(Session(host: host, token: token));
+      }
+      return result;
+    } catch (err) {
+      return false;
     }
-    return result;
   }
 
   Future<bool> _canConnect(

@@ -11,3 +11,4 @@ loginApiToken,API Token,Token de la API
 loginErrorHostnameInvalid,Whoops! The hostname appears to be invalid,¡Uyyy! El nombre del servidor parece incorrecto
 loginErrorConnectionFailed,Looks like something went wrong. Check your internet connection and API Key,
 coreLoading,Loading,Cargando
+coreNoData,No data,Sin datos
