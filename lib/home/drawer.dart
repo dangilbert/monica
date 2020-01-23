@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:monica/auth/session.dart';
 import 'package:monica/core/data/user.dart';
+import 'package:monica/dashboard/dashboard_page.dart';
 import 'package:monica/home/bloc/drawer_bloc.dart';
 import 'package:monica/i18n.dart';
-import 'package:monica/new_page.dart';
 import 'package:monica/service/navigation_service.dart';
 
 class MonicaDrawer extends StatefulWidget {
   
-  final Function(Widget page) pageCallback;
+  final Function(String page) pageCallback;
 
   MonicaDrawer(
       {Key key,
@@ -22,11 +22,11 @@ class MonicaDrawer extends StatefulWidget {
 }
 
 class _MonicaDrawerState extends State<MonicaDrawer> {
-  Function(Widget page) _pageCallback;
+  Function(String page) _pageCallback;
 
   _MonicaDrawerState(
       {GlobalKey<ScaffoldState> scaffoldKey,
-      @required Function(Widget page) pageCallback}) {
+      @required Function(String page) pageCallback}) {
     _pageCallback = pageCallback;
   }
 
@@ -100,45 +100,45 @@ class _MonicaDrawerState extends State<MonicaDrawer> {
           leading: Icon(Icons.dashboard),
           title: Text(I18n.of(context).appScreenDashboard),
           onTap: () => setState(() {
-            _pageCallback(NewPage(I18n.of(context).appScreenDashboard));
+            _pageCallback(Routes.dashboard);
             Navigator.pop(context);
           }),
         ),
         ListTile(
           leading: Icon(Icons.contacts),
-          title: Text('Contacts'),
+          title: Text(I18n.of(context).appScreenContacts),
           onTap: () => setState(() {
-            _pageCallback(NewPage("Contacts"));
+            _pageCallback(Routes.contacts);
             Navigator.pop(context);
           }),
         ),
         ListTile(
           leading: Icon(Icons.photo_library),
-          title: Text('Photo Gallery'),
+          title: Text(I18n.of(context).appScreenGallery),
           onTap: () => setState(() {
-            _pageCallback(NewPage("Photo Gallery"));
+            _pageCallback(Routes.gallery);
             Navigator.pop(context);
           }),
         ),
         ListTile(
           leading: Icon(Icons.note),
-          title: Text('Journal'),
+          title: Text(I18n.of(context).appScreenJournal),
           onTap: () => setState(() {
-            _pageCallback(NewPage("Journal"));
+            _pageCallback(Routes.journal);
             Navigator.pop(context);
           }),
         ),
         ListTile(
           leading: Icon(Icons.settings),
-          title: Text('Settings'),
+          title: Text(I18n.of(context).appScreenSettings),
           onTap: () => setState(() {
-            _pageCallback(NewPage("Settings"));
+            _pageCallback(Routes.settings);
             Navigator.pop(context);
           }),
         ),
         ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            title: Text(I18n.of(context).actionLogout),
             onTap: () async {
               // TODO add a bloc for this screen to handle logout
               SessionRepo sessionRepo = GetIt.instance.get();

@@ -7,13 +7,23 @@ import 'package:flutter/material.dart';
 class I18n {
   String get appScreenDashboard => _getText("appScreenDashboard");
 
+  String get appScreenCalendar => _getText("appScreenCalendar");
+
+  String get appScreenContacts => _getText("appScreenContacts");
+
+  String get appScreenGallery => _getText("appScreenGallery");
+
+  String get appScreenJournal => _getText("appScreenJournal");
+
+  String get appScreenSettings => _getText("appScreenSettings");
+
+  String get actionLogout => _getText("actionLogout");
+
   String get loginHostName => _getText("loginHostName");
 
   String get loginApiToken => _getText("loginApiToken");
 
   String get loginErrorHostnameInvalid => _getText("loginErrorHostnameInvalid");
-
-  String get appScreenContacts => _getText("appScreenContacts");
 
   String get loginErrorConnectionFailed =>
       _getText("loginErrorConnectionFailed");
@@ -24,10 +34,15 @@ class I18n {
 
   static Map<String, String> _enValues = {
     "appScreenDashboard": "Dashboard",
+    "appScreenCalendar": "Calendar",
+    "appScreenContacts": "Contacts",
+    "appScreenGallery": "Photo Gallery",
+    "appScreenJournal": "Journal",
+    "appScreenSettings": "Settings",
+    "actionLogout": "Logout",
     "loginHostName": "Monica Host",
     "loginApiToken": "API Token",
     "loginErrorHostnameInvalid": "Whoops! The hostname appears to be invalid",
-    "appScreenContacts": "Contacts",
     "loginErrorConnectionFailed":
         "Looks like something went wrong. Check your internet connection and API Key",
     "coreLoading": "Loading",
@@ -35,11 +50,16 @@ class I18n {
 
   static Map<String, String> _esValues = {
     "appScreenDashboard": "Panel de inicio",
+    "appScreenCalendar": " Calendario",
+    "appScreenContacts": "Contactos",
+    "appScreenGallery": "Galeria de Fotos",
+    "appScreenJournal": "Diario",
+    "appScreenSettings": "Ajustes",
+    "actionLogout": "Desconectar",
     "loginHostName": "Servidor de Monica",
     "loginApiToken": "Token de la API",
     "loginErrorHostnameInvalid":
         "¡Uyyy! El nombre del servidor parece incorrecto",
-    "appScreenContacts": "Contacto",
     "loginErrorConnectionFailed":
         "Looks like something went wrong. Check your internet connection and API Key",
     "coreLoading": "Cargando",
