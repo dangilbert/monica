@@ -22,15 +22,15 @@ class NavigationService {
 }
 
 class Routes {
-  static const String Home = "/home";
-  static const String Login = "/login";
+  static const String Home = "home";
+  static const String Login = "login";
 
   /*
   * Routes which are opened from the drawer
   */
-  static const String dashboard = "/home/dashboard";
-  static const String contacts = "/home/contacts";
-  static const String gallery = "/home/gallery";
-  static const String journal = "/home/journal";
-  static const String settings = "/home/settings";
+  static const String dashboard = "home/dashboard";
+  static const String contacts = "home/contacts";
+  static const String gallery = "home/gallery";
+  static const String journal = "home/journal";
+  static const String settings = "home/settings";
 }

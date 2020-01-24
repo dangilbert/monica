@@ -19,12 +19,10 @@ class ContactsRepo {
 
   Future<BinaryResult<void>> loadContacts() async {
     BinaryResult<List<Contact>> contactsResult = await _request.getContacts();
-    if (contactsResult is BinaryResultSuccess) {
-        // TODO persist the contacts
-        BinaryResultSuccess<List<Contact>> successResult = contactsResult;
-        _contacts.add(successResult.value);
-    }
-    return contactsResult;
+    return contactsResult..onSuccess((contacts) {
+      // TODO persist the contacts
+      _contacts.add(contacts);
+    });
   }
 
 }

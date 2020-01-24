@@ -32,6 +32,8 @@ class I18n {
 
   String get coreNoData => _getText("coreNoData");
 
+  String get dashboardRecentContacts => _getText("dashboardRecentContacts");
+
   static Map<String, String> _localizedValues;
 
   static Map<String, String> _enValues = {
@@ -49,6 +51,7 @@ class I18n {
         "Looks like something went wrong. Check your internet connection and API Key",
     "coreLoading": "Loading",
     "coreNoData": "No data",
+    "dashboardRecentContacts": "Recent Contacts",
   };
 
   static Map<String, String> _esValues = {
@@ -67,6 +70,7 @@ class I18n {
         "Looks like something went wrong. Check your internet connection and API Key",
     "coreLoading": "Cargando",
     "coreNoData": "Sin datos",
+    "dashboardRecentContacts": "Contactos Recientes",
   };
 
   static Map<String, Map<String, String>> _allValues = {

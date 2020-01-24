@@ -24,7 +24,10 @@ class DashboardBloc extends Bloc<DashboardBlocViewState,
     });
 
     viewState = DashboardBlocViewState(
-        loading: _loading.stream, summary: _dashboardSummary.stream);
+        loading: _loading.stream, 
+        summary: _dashboardSummary.stream,
+        contacts: _repo.contacts
+        );
 
 _buildDashboardSummary();
     _loadData();
@@ -68,9 +71,10 @@ _buildDashboardSummary();
 }
 
 class DashboardBlocViewState {
-  DashboardBlocViewState({@required this.loading, @required this.summary});
+  DashboardBlocViewState({@required this.loading, @required this.summary, @required this.contacts});
   final Stream<bool> loading;
   final Stream<DashboardSummary> summary;
+  final Stream<List<Contact>> contacts;
 }
 
 @immutable

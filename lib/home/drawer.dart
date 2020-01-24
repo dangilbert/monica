@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:monica/auth/session.dart';
 import 'package:monica/core/data/user.dart';
-import 'package:monica/dashboard/dashboard_page.dart';
 import 'package:monica/home/bloc/drawer_bloc.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/service/navigation_service.dart';
@@ -12,10 +11,7 @@ class MonicaDrawer extends StatefulWidget {
   
   final Function(String page) pageCallback;
 
-  MonicaDrawer(
-      {Key key,
-      @required this.pageCallback})
-      : super(key: key);
+  MonicaDrawer({@required this.pageCallback});
 
   @override
   _MonicaDrawerState createState() => _MonicaDrawerState(pageCallback: pageCallback);
@@ -24,9 +20,7 @@ class MonicaDrawer extends StatefulWidget {
 class _MonicaDrawerState extends State<MonicaDrawer> {
   Function(String page) _pageCallback;
 
-  _MonicaDrawerState(
-      {GlobalKey<ScaffoldState> scaffoldKey,
-      @required Function(String page) pageCallback}) {
+  _MonicaDrawerState({@required Function(String page) pageCallback}) {
     _pageCallback = pageCallback;
   }
 

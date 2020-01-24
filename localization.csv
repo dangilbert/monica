@@ -12,3 +12,4 @@ loginErrorHostnameInvalid,Whoops! The hostname appears to be invalid,¡Uyyy! El 
 loginErrorConnectionFailed,Looks like something went wrong. Check your internet connection and API Key,
 coreLoading,Loading,Cargando
 coreNoData,No data,Sin datos
+dashboardRecentContacts,Recent Contacts,Contactos Recientes

@@ -79,6 +79,12 @@ class Contact {
     updatedAt = json['updated_at'];
   }
 
+  get initials {
+    var firstInitial = lastName != null ? firstName.substring(0, 1) : firstName;
+    var secondInitial = lastName != null ? lastName.substring(0, 1) : "";
+    return "$firstInitial$secondInitial";
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;

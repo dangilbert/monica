@@ -6,14 +6,11 @@ import 'package:monica/new_page.dart';
 import 'package:monica/service/navigation_service.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
-
-  @override
+    @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 static Map<String, Widget> _pages = {
     Routes.dashboard: DashboardPage(),
@@ -29,7 +26,6 @@ static Map<String, Widget> _pages = {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        key: _scaffoldKey,
         appBar: AppBar(
           title: new Text("Monica"),
           elevation:
