@@ -1,35 +1,37 @@
 import 'package:flutter/foundation.dart';
 
 class BinaryResult<T> {
-  bool success;
-
-  BinaryResult({@required this.success});
+  BinaryResult();
 
   factory BinaryResult.success({@required T value}) {
     return BinaryResultSuccess(value: value);
   }
 
-  factory BinaryResult.failure() => BinaryResultFailure();
+  factory BinaryResult.failure({Exception exception}) => BinaryResultFailure(exception: exception);
 
   void onSuccess(Function(T value) action) {
-    if (success) {
+    if (this is BinaryResultSuccess) {
       BinaryResultSuccess<T> result = this;
       action(result.value);
     }
   }
 
   void onFailure(Function() action) {
-    if (!success) {
+    if (this is BinaryResultFailure) {
       action();
     }
   }
 }
 
+@immutable
 class BinaryResultSuccess<T> extends BinaryResult<T> {
-  T value;
-  BinaryResultSuccess({@required this.value}) : super(success: true);
+  final T value;
+  BinaryResultSuccess({@required this.value});
 }
 
+@immutable
 class BinaryResultFailure<T> extends BinaryResult<T> {
-  BinaryResultFailure() : super(success: false);
+  final Exception exception;
+
+  BinaryResultFailure({this.exception});
 }

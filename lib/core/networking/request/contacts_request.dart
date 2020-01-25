@@ -13,17 +13,21 @@ class ContactsRequest {
   }
 
   Future<BinaryResult<List<Contact>>> getContacts() async {
-    try {
-      var result = await _client.get("contacts");
-      var contactsJson = jsonDecode(result.body)['data'];
-      List<Contact> contacts =
-          contactsJson.toList().map<Contact>((contactJson) {
-            return Contact.fromJson(contactJson);
-          }).toList();
-      return BinaryResult.success(value: contacts);
-    } catch (err) {
-      print(err);
+    var result = await _client.get("contacts");
+    if (result is BinaryResultSuccess) {
+      try {
+        var contactsJson = jsonDecode(result.value)['data'];
+        List<Contact> contacts =
+            contactsJson.toList().map<Contact>((contactJson) {
+          return Contact.fromJson(contactJson);
+        }).toList();
+        return BinaryResult.success(value: contacts);
+      } catch (err) {
+        // TODO inject logger
+        return BinaryResult.failure(exception: err);
+      }
+    } else {
+      return BinaryResult.failure();
     }
-    return BinaryResult.failure();
   }
 }

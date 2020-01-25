@@ -1,4 +1,5 @@
 import 'package:http/http.dart';
+import 'package:monica/core/networking/binary_result.dart';
 import 'package:monica/core/networking/client.dart';
 
 class FakeMonicaClient extends MonicaClient {
@@ -22,7 +23,7 @@ class FakeMonicaClient extends MonicaClient {
   }
 
   @override
-  Future<Response> get(String path, {Map<String, String> headers}) async {
-    return Response("Error", 400);
+  Future<BinaryResult<dynamic>> get(String path, {Map<String, String> headers}) async {
+    return BinaryResult.failure(exception: Exception("400 Client Error"));
   }
 }

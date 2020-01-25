@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -7,7 +6,6 @@ import 'package:monica/core/networking/binary_result.dart';
 import 'package:monica/core/networking/client.dart';
 
 class UserRequest {
-
   MonicaClient _client;
 
   UserRequest({@required MonicaClient client}) {
@@ -15,14 +13,17 @@ class UserRequest {
   }
 
   Future<BinaryResult<User>> getUser() async {
-    try {
-      var result = await _client.get("me");
-      var user = User.fromJson(jsonDecode(result.body));
-      return BinaryResult.success(value: user);
-    } catch (err) {
-      print(err);
+    var result = await _client.get("me");
+    if (result is BinaryResultSuccess) {
+      try {
+        var user = User.fromJson(jsonDecode(result.value));
+        return BinaryResult.success(value: user);
+      } catch (err) {
+        print(err);
+        return BinaryResult.failure(exception: err);
+      }
+    } else {
+      return BinaryResult.failure();
     }
-    return BinaryResult.failure();
   }
-
 }
