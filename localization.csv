@@ -13,3 +13,4 @@ loginErrorConnectionFailed,Looks like something went wrong. Check your internet 
 coreLoading,Loading,Cargando
 coreNoData,No data,Sin datos
 dashboardRecentContacts,Recent Contacts,Contactos Recientes
+dashboardSummary,Summary,Resumen

@@ -34,6 +34,8 @@ class I18n {
 
   String get dashboardRecentContacts => _getText("dashboardRecentContacts");
 
+  String get dashboardSummary => _getText("dashboardSummary");
+
   static Map<String, String> _localizedValues;
 
   static Map<String, String> _enValues = {
@@ -52,6 +54,7 @@ class I18n {
     "coreLoading": "Loading",
     "coreNoData": "No data",
     "dashboardRecentContacts": "Recent Contacts",
+    "dashboardSummary": "Summary",
   };
 
   static Map<String, String> _esValues = {
@@ -71,6 +74,7 @@ class I18n {
     "coreLoading": "Cargando",
     "coreNoData": "Sin datos",
     "dashboardRecentContacts": "Contactos Recientes",
+    "dashboardSummary": "Resumen",
   };
 
   static Map<String, Map<String, String>> _allValues = {

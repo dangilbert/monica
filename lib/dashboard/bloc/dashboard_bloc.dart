@@ -11,8 +11,11 @@ class DashboardBloc extends Bloc<DashboardBlocViewState,
     DashboardBlocViewEffect, DashboardBlocViewAction> {
   DashboardRepo _repo = GetIt.instance.get();
 
-  StreamController<bool> _loading = StreamController();
+  bool _loadingContacts = false;
+  bool _loadingActivities = false;
+  bool _loadingGifts = false;
   StreamController<DashboardSummary> _dashboardSummary = StreamController();
+  StreamController<ContactsState> _contactsState = StreamController();
 
   List<Contact> _contacts = [];
 
@@ -21,15 +24,14 @@ class DashboardBloc extends Bloc<DashboardBlocViewState,
     _repo.contacts.listen((data) {
       _contacts = data;
       _buildDashboardSummary();
+      _buildContactsState();
     });
 
     viewState = DashboardBlocViewState(
-        loading: _loading.stream, 
         summary: _dashboardSummary.stream,
-        contacts: _repo.contacts
-        );
+        contactsState: _contactsState.stream);
 
-_buildDashboardSummary();
+    _buildDashboardSummary();
     _loadData();
   }
 
@@ -52,15 +54,20 @@ _buildDashboardSummary();
   }
 
   void _loadData() async {
-    _loading.add(true);
+    _loadingContacts = true;
     var result = await _repo.fetchContacts();
     result.onFailure(() => effectController.add(LoadingErrorEffect()));
-    _loading.add(false);
+    _loadingContacts = false;
   }
 
   void _buildDashboardSummary() {
     _dashboardSummary.add(DashboardSummary(
+      loading: _loadingContacts || _loadingActivities || _loadingGifts,
         activitiesCount: 0, contactsCount: _contacts.length, giftsCount: 0));
+  }
+
+  void _buildContactsState() {
+    _contactsState.add(ContactsState(loading: _loadingContacts, contacts: _contacts));
   }
 
   @override
@@ -71,22 +78,30 @@ _buildDashboardSummary();
 }
 
 class DashboardBlocViewState {
-  DashboardBlocViewState({@required this.loading, @required this.summary, @required this.contacts});
-  final Stream<bool> loading;
+  DashboardBlocViewState({@required this.summary, @required this.contactsState});
   final Stream<DashboardSummary> summary;
-  final Stream<List<Contact>> contacts;
+  final Stream<ContactsState> contactsState;
 }
 
 @immutable
 class DashboardSummary {
+  final bool loading;
   final int contactsCount;
   final int activitiesCount;
   final int giftsCount;
 
   DashboardSummary(
-      {@required this.contactsCount,
+      {@required this.loading,
+      @required this.contactsCount,
       @required this.activitiesCount,
       @required this.giftsCount});
+}
+
+class ContactsState {
+  final bool loading;
+  final List<Contact> contacts;
+
+  ContactsState({@required this.loading, @required this.contacts});
 }
 
 abstract class DashboardBlocViewEffect extends Equatable {}

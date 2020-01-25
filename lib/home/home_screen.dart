@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:monica/contacts/contacts_page.dart';
 import 'package:monica/dashboard/dashboard_page.dart';
 import 'package:monica/home/drawer.dart';
 import 'package:monica/new_page.dart';
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
 static Map<String, Widget> _pages = {
     Routes.dashboard: DashboardPage(),
-    Routes.contacts: NewPage("Contacts"),
+    Routes.contacts: ContactsPage(),
     Routes.gallery: NewPage("Gallery"),
     Routes.journal: NewPage("Journal"),
     Routes.settings: NewPage("Settings"),
