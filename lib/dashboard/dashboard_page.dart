@@ -2,11 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:get_it/get_it.dart';
 import 'package:loading/indicator/line_scale_indicator.dart';
 import 'package:loading/loading.dart';
+import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/dashboard/bloc/dashboard_bloc.dart';
 import 'package:monica/i18n.dart';
+import 'package:monica/service/navigation_service.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({Key key}) : super(key: key);
@@ -17,6 +20,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   DashboardBloc _bloc = DashboardBloc();
+  NavigationService _navigationService = GetIt.instance.get();
 
   @override
   void initState() {
@@ -135,15 +139,22 @@ class _DashboardPageState extends State<DashboardPage> {
               crossAxisCount: 5, childAspectRatio: 1.0),
           delegate: SliverChildBuilderDelegate((context, index) {
             Contact contact = state.contacts[index];
-            return GridTile(
-                child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: Container(
-                        color: Colors.blue,
-                        child: Center(
-                            child: Text("${contact.initials}",
-                                style:
-                                    Theme.of(context).textTheme.display2)))));
+            return InkWell(
+                // When the user taps the button, show a snackbar.
+                onTap: () {
+                  _navigationService.navigateTo(Routes.contactDetails,
+                      arguments: ContactDetailsPageArgs(id: contact.id));
+                },
+                child: GridTile(
+                    child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                            color: Colors.blue,
+                            child: Center(
+                                child: Text("${contact.initials}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .display2))))));
           }, childCount: min(10, state.contacts.length)),
         );
       },

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:loading/indicator/line_scale_indicator.dart';
 import 'package:loading/loading.dart';
 import 'package:monica/contacts/bloc/contacts_bloc.dart';
+import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/i18n.dart';
+import 'package:monica/service/navigation_service.dart';
 
 class ContactsPage extends StatefulWidget {
   ContactsPage({Key key}) : super(key: key);
@@ -15,6 +18,7 @@ class ContactsPage extends StatefulWidget {
 
 class _ContactsPageState extends State<ContactsPage> {
   ContactsBloc _bloc = ContactsBloc();
+  NavigationService _navigationService = GetIt.instance.get();
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +58,7 @@ class _ContactsPageState extends State<ContactsPage> {
             return InkWell(
                 // When the user taps the button, show a snackbar.
                 onTap: () {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('Tap'),
-                  ));
-                },
+                  _navigationService.navigateTo(Routes.contactDetails, arguments: ContactDetailsPageArgs(id: contact.id)); },
                 child: ListTile(
                   leading: _contactIcon(contact),
                   title: Text("${contact.firstName} ${contact.lastName}"),

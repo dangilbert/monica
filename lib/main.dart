@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:monica/auth/session.dart';
 import 'package:monica/core/networking/user_request.dart';
@@ -10,6 +11,7 @@ import 'package:monica/home/home_screen.dart';
 import 'package:monica/login/login_page.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:get_it/get_it.dart';
+import 'contacts/details/contact_details_page.dart';
 import 'core/data/repo/contacts_repo.dart';
 import 'core/networking/client.dart';
 import 'core/networking/request/contacts_request.dart';
@@ -26,9 +28,13 @@ void main() {
 
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  
+
   _initDependencyGraph();
-  return runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -83,6 +89,9 @@ class MyApp extends StatelessWidget {
           case Routes.Login:
             return MaterialPageRoute(
                 fullscreenDialog: true, builder: (_) => LoginPage());
+          case Routes.contactDetails:
+            ContactDetailsPageArgs args = settings.arguments;
+            return MaterialPageRoute(builder: (_) => ContactDetailsPage(contactId: args.id));
         }
         var page = settings.name.startsWith('/page/')
             ? NewPage(settings.name.substring(6))
