@@ -15,8 +15,18 @@ import 'core/networking/client.dart';
 import 'core/networking/request/contacts_request.dart';
 import 'service/navigation_service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() {
+  // Set `enableInDevMode` to true to see reports while in debug mode
+  // This is only to be used for confirming that reports are being
+  // submitted as expected. It is not intended to be used for everyday
+  // development.
+  Crashlytics.instance.enableInDevMode = true;
+
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  
   _initDependencyGraph();
   return runApp(MyApp());
 }
@@ -71,7 +81,8 @@ class MyApp extends StatelessWidget {
           case Routes.Home:
             return MaterialPageRoute(builder: (_) => HomePage());
           case Routes.Login:
-            return MaterialPageRoute(fullscreenDialog: true, builder: (_) => LoginPage());
+            return MaterialPageRoute(
+                fullscreenDialog: true, builder: (_) => LoginPage());
         }
         var page = settings.name.startsWith('/page/')
             ? NewPage(settings.name.substring(6))
@@ -93,7 +104,7 @@ void _initDependencyGraph() {
   GetIt.instance.registerSingleton(NavigationService());
   SessionRepo sessionRepo = SessionRepo();
   GetIt.instance.registerSingleton(sessionRepo);
-  
+
   GetIt.instance.registerLazySingleton(() => ContactsRepo());
   GetIt.instance.registerLazySingleton(() => DashboardRepo());
 

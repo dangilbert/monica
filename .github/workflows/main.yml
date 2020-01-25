@@ -88,20 +88,27 @@ jobs:
         with:
           java-version: '12.x'
       - run: flutter pub get
-      # build iOS desktop version
-      - run: flutter build ios --release --no-codesign --build-number=`cat .build-id/id`
       # build Android version
-      - name: Decrypt signing key
+      - name: Decrypt signing key and firebase config
         run: ./.github/scripts/decrypt_secret.sh
         env:
           ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE: ${{ secrets.ANDROID_DEPLOY_KEY_SECRET_PASSPHRASE }}
           KEY_PROPERTIES_SECRET_PASSPHRASE: ${{ secrets.KEY_PROPERTIES_SECRET_PASSPHRASE }}
           GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_SECRET_PASSPHRASE }}
-      - run: echo $GITHUB_WORKSPACE
-      - run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
-      - run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
-      - run: mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
-      - run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --build-number=`cat .build-id/id`
+          ANDROID_GOOGLE_JSON_ENCRYPTION_SECRET: ${{ secrets.ANDROID_GOOGLE_JSON_ENCRYPTION_SECRET }}
+          IOS_GOOGLE_PLIST_ENCRYPTION_SECRET: ${{ secrets.IOS_GOOGLE_PLIST_ENCRYPTION_SECRET }}
+      - name: Move decrypted files to their correct locations
+        run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
+        run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
+        run: mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
+        run: mv $HOME/secrets/google-services.json $GITHUB_WORKSPACE/android/app/google-services.json
+        run: mv $HOME/secrets/GoogleService-Info.plist $GITHUB_WORKSPACE/ios/Runner/GoogleService-Info.plist
+
+      # build iOS version
+      - name: Build Unsigned iOS App
+        run: flutter build ios --release --no-codesign --build-number=`cat .build-id/id`
+      - name: Build Android app
+        run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --build-number=`cat .build-id/id`
       - name: Fastlane Deploy Android Internal
         uses: maierj/fastlane-action@v1.2.0
         with:
