@@ -8,7 +8,7 @@ import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/dashboard/data/dashboard_repo.dart';
 
 class DashboardBloc extends Bloc<DashboardBlocViewState,
-    DashboardBlocViewEffect, DashboardBlocViewAction> {
+  DashboardBlocViewEffect, DashboardBlocViewAction> {
   DashboardRepo _repo = GetIt.instance.get();
 
   bool _loadingContacts = false;
@@ -97,6 +97,7 @@ class DashboardSummary {
       @required this.giftsCount});
 }
 
+@immutable
 class ContactsState {
   final bool loading;
   final List<Contact> contacts;

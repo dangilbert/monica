@@ -11,7 +11,7 @@ class Contact {
   LastActivityTogether lastActivityTogether;
   int stayInTouchFrequency;
   String stayInTouchTriggerDate;
-  Dates information;
+  Information information;
   List<Null> addresses;
   List<Null> tags;
   Statistics statistics;
@@ -44,7 +44,7 @@ class Contact {
     id = json['id'];
     object = json['object'];
     firstName = json['first_name'];
-    lastName = json['last_name'];
+    lastName = json['last_name'] ?? "";
     nickname = json['nickname'];
     gender = json['gender'];
     isPartial = json['is_partial'];
@@ -56,7 +56,7 @@ class Contact {
     stayInTouchFrequency = json['stay_in_touch_frequency'];
     stayInTouchTriggerDate = json['stay_in_touch_trigger_date'];
     information = json['information'] != null
-        ? new Dates.fromJson(json['information'])
+        ? new Information.fromJson(json['information'])
         : null;
     // if (json['addresses'] != null) {
     //   addresses = new List<Null>();
@@ -80,8 +80,9 @@ class Contact {
   }
 
   get initials {
-    var firstInitial = lastName != null ? firstName.substring(0, 1) : firstName;
-    var secondInitial = lastName != null ? lastName.substring(0, 1) : "";
+    var firstInitial = firstName.substring(0, 1);
+    var secondInitial =
+        lastName != null && lastName.length > 0 ? lastName.substring(0, 1) : "";
     return "$firstInitial$secondInitial";
   }
 
@@ -145,7 +146,7 @@ class LastActivityTogether {
 }
 
 class Information {
-  Relationships relationships;
+  // Relationships relationships;
   Dates dates;
   Career career;
   Avatar avatar;
@@ -153,17 +154,16 @@ class Information {
   HowYouMet howYouMet;
 
   Information(
-      {this.relationships,
-      this.dates,
+      {this.dates,
       this.career,
       this.avatar,
       this.foodPreferencies,
       this.howYouMet});
 
   Information.fromJson(Map<String, dynamic> json) {
-    relationships = json['relationships'] != null
-        ? new Relationships.fromJson(json['relationships'])
-        : null;
+    // relationships = json['relationships'] != null
+    //     ? new Relationships.fromJson(json['relationships'])
+    //     : null;
     dates = json['dates'] != null ? new Dates.fromJson(json['dates']) : null;
     career =
         json['career'] != null ? new Career.fromJson(json['career']) : null;
@@ -177,9 +177,6 @@ class Information {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.relationships != null) {
-      data['relationships'] = this.relationships.toJson();
-    }
     if (this.dates != null) {
       data['dates'] = this.dates.toJson();
     }
@@ -197,38 +194,38 @@ class Information {
   }
 }
 
-class Relationships {
-  Love love;
-  Love family;
-  Love friend;
-  Love work;
+// class Relationships {
+//   Love love;
+//   Family family;
+//   Friend friend;
+//   Work work;
 
-  Relationships({this.love, this.family, this.friend, this.work});
+//   Relationships({this.love, this.family, this.friend, this.work});
 
-  Relationships.fromJson(Map<String, dynamic> json) {
-    love = json['love'] != null ? new Love.fromJson(json['love']) : null;
-    family = json['family'] != null ? new Love.fromJson(json['family']) : null;
-    friend = json['friend'] != null ? new Love.fromJson(json['friend']) : null;
-    work = json['work'] != null ? new Love.fromJson(json['work']) : null;
-  }
+//   Relationships.fromJson(Map<String, dynamic> json) {
+// love = json['love'] != null ? new Love.fromJson(json['love']) : null;
+// family = json['family'] != null ? new Family.fromJson(json['family']) : null;
+// friend = json['friend'] != null ? new Friend.fromJson(json['friend']) : null;
+// work = json['work'] != null ? new Work.fromJson(json['work']) : null;
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.love != null) {
-      data['love'] = this.love.toJson();
-    }
-    if (this.family != null) {
-      data['family'] = this.family.toJson();
-    }
-    if (this.friend != null) {
-      data['friend'] = this.friend.toJson();
-    }
-    if (this.work != null) {
-      data['work'] = this.work.toJson();
-    }
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     if (this.love != null) {
+//       data['love'] = this.love.toJson();
+//     }
+//     if (this.family != null) {
+//       data['family'] = this.family.toJson();
+//     }
+//     if (this.friend != null) {
+//       data['friend'] = this.friend.toJson();
+//     }
+//     if (this.work != null) {
+//       data['work'] = this.work.toJson();
+//     }
+//     return data;
+//   }
+// }
 
 class Love {
   int total;
@@ -417,14 +414,14 @@ class FirstMetThroughContact {
 class Birthdate {
   bool isAgeBased;
   bool isYearUnknown;
-  String date;
+  DateTime date;
 
   Birthdate({this.isAgeBased, this.isYearUnknown, this.date});
 
   Birthdate.fromJson(Map<String, dynamic> json) {
     isAgeBased = json['is_age_based'];
     isYearUnknown = json['is_year_unknown'];
-    date = json['date'];
+    date = json["date"] != null ? DateTime.parse(json['date']) : null;
   }
 
   Map<String, dynamic> toJson() {
