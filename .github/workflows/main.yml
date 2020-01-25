@@ -98,12 +98,12 @@ jobs:
           ANDROID_GOOGLE_JSON_ENCRYPTION_SECRET: ${{ secrets.ANDROID_GOOGLE_JSON_ENCRYPTION_SECRET }}
           IOS_GOOGLE_PLIST_ENCRYPTION_SECRET: ${{ secrets.IOS_GOOGLE_PLIST_ENCRYPTION_SECRET }}
       - name: Move decrypted files to their correct locations
-        run: mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
-        run: mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
-        run: mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
-        run: mv $HOME/secrets/google-services.json $GITHUB_WORKSPACE/android/app/google-services.json
-        run: mv $HOME/secrets/GoogleService-Info.plist $GITHUB_WORKSPACE/ios/Runner/GoogleService-Info.plist
-
+        run: |
+          mv $HOME/secrets/key.jks $GITHUB_WORKSPACE/android/app/key.jks
+          mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
+          mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
+          mv $HOME/secrets/google-services.json $GITHUB_WORKSPACE/android/app/google-services.json
+          mv $HOME/secrets/GoogleService-Info.plist $GITHUB_WORKSPACE/ios/Runner/GoogleService-Info.plist
       # build iOS version
       - name: Build Unsigned iOS App
         run: flutter build ios --release --no-codesign --build-number=`cat .build-id/id`
