@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import 'package:monica/core/networking/binary_result.dart';
 import 'package:monica/core/networking/client.dart';
 

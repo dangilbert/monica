@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:monica/auth/session.dart';
 import 'package:monica/core/networking/api_health.dart';
 import 'dart:convert';
