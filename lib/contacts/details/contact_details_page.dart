@@ -34,7 +34,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
         stream: _bloc.viewState.contactState,
         builder: (context, contactState) {
           var loading = !contactState.hasData || contactState.data.loading;
-          var contact = contactState.data.contact;
+          var contact = contactState.data?.contact;
           return Scaffold(
               appBar: AppBar(
                 elevation:
