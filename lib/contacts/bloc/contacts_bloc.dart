@@ -34,7 +34,10 @@ class ContactsBloc extends Bloc<ContactsBlocViewState, ContactsBlocViewEffect,
 
   @override
   void handleAction(ContactsBlocViewAction action) {
-    switch (action) {
+    switch (action.runtimeType) {
+      case RefreshViewAction:
+        _loadData();
+        break;
     }
   }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
-import 'package:loading/indicator/line_scale_indicator.dart';
-import 'package:loading/loading.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:monica/contacts/bloc/contacts_bloc.dart';
 import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
@@ -25,9 +24,13 @@ class _ContactsPageState extends State<ContactsPage> {
     List<Widget> slivers = [_contactsList()];
 
     return Container(
-        child: CustomScrollView(
-      slivers: slivers,
-    ));
+        child: RefreshIndicator(
+            onRefresh: () async {
+              _bloc.handleAction(RefreshViewAction());
+            },
+            child: CustomScrollView(
+              slivers: slivers,
+            )));
   }
 
   Widget _contactsList() {
@@ -40,8 +43,12 @@ class _ContactsPageState extends State<ContactsPage> {
           items = [
             Container(
                 child: Center(
-                    child:
-                        Loading(indicator: LineScaleIndicator(), size: 40.0)))
+                    child: SizedBox(
+                      height: 50.0,
+                        child: LoadingIndicator(
+              indicatorType: Indicator.orbit,
+              color: Theme.of(context).accentColor,
+            ))))
           ];
         } else {
           items = state.contacts.map<Widget>((contact) {
@@ -58,7 +65,9 @@ class _ContactsPageState extends State<ContactsPage> {
             return InkWell(
                 // When the user taps the button, show a snackbar.
                 onTap: () {
-                  _navigationService.navigateTo(Routes.contactDetails, arguments: ContactDetailsPageArgs(id: contact.id)); },
+                  _navigationService.navigateTo(Routes.contactDetails,
+                      arguments: ContactDetailsPageArgs(id: contact.id));
+                },
                 child: ListTile(
                   leading: _contactIcon(contact),
                   title: Text("${contact.firstName} ${contact.lastName}"),

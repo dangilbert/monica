@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:get_it/get_it.dart';
-import 'package:loading/indicator/line_scale_indicator.dart';
-import 'package:loading/loading.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/core/data/model/life_event.dart';
@@ -53,9 +52,15 @@ class _DashboardPageState extends State<DashboardPage> {
     ];
 
     return Container(
+      child: RefreshIndicator(
         child: CustomScrollView(
-      slivers: slivers,
-    ));
+          slivers: slivers,
+        ),
+        onRefresh: () async {
+          _bloc.handleAction(RefreshViewAction());
+        },
+      ),
+    );
   }
 
   Widget _sectionHeader({@required Widget child}) {
@@ -67,32 +72,33 @@ class _DashboardPageState extends State<DashboardPage> {
         stream: _bloc.viewState.summary,
         builder: (context, summary) {
           DashboardSummary summaryData = summary.data;
-
-          if (!summary.hasData || summaryData.loading) {
-            return SliverToBoxAdapter(
-              child: Container(
-                  child: Center(
-                      child: Loading(
-                          indicator: LineScaleIndicator(), size: 40.0))),
-            );
-          }
+          var loading = !summary.hasData || summaryData.loading;
 
           return SliverGrid.count(
-              crossAxisCount: 3, children: _summaryItems(summaryData));
+              crossAxisCount: 3, children: _summaryItems(summaryData, loading));
         });
   }
 
-  List<Widget> _summaryItems(DashboardSummary summaryData) {
+  List<Widget> _summaryItems(DashboardSummary summaryData, bool loading) {
+    var loadingIndicator = SizedBox(
+        height: 50.0,
+        child: LoadingIndicator(
+          indicatorType: Indicator.orbit,
+          color: Theme.of(context).accentColor,
+        ));
+
     return [
       Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "${summaryData.contactsCount}",
-              style: Theme.of(context).textTheme.display3,
-            ),
+            loading
+                ? loadingIndicator
+                : Text(
+                    "${summaryData.contactsCount}",
+                    style: Theme.of(context).textTheme.display3,
+                  ),
             Text("Contacts"),
           ],
         ),
@@ -102,10 +108,12 @@ class _DashboardPageState extends State<DashboardPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "${summaryData.activitiesCount}",
-              style: Theme.of(context).textTheme.display3,
-            ),
+            loading
+                ? loadingIndicator
+                : Text(
+                    "${summaryData.activitiesCount}",
+                    style: Theme.of(context).textTheme.display3,
+                  ),
             Text("Activities"),
           ],
         ),
@@ -115,10 +123,12 @@ class _DashboardPageState extends State<DashboardPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "${summaryData.giftsCount}",
-              style: Theme.of(context).textTheme.display3,
-            ),
+            loading
+                ? loadingIndicator
+                : Text(
+                    "${summaryData.giftsCount}",
+                    style: Theme.of(context).textTheme.display3,
+                  ),
             Text("Gifts"),
           ],
         ),
@@ -135,11 +145,15 @@ class _DashboardPageState extends State<DashboardPage> {
 
         if (loading) {
           return SliverToBoxAdapter(
-            child: Container(
-                child: Center(
-                    child:
-                        Loading(indicator: LineScaleIndicator(), size: 40.0))),
-          );
+              child: Container(
+                  child: Center(
+                      child: SizedBox(
+            height: 50.0,
+            child: LoadingIndicator(
+              indicatorType: Indicator.orbit,
+              color: Theme.of(context).accentColor,
+            ),
+          ))));
         }
 
         return SliverGrid(
@@ -178,27 +192,33 @@ class _DashboardPageState extends State<DashboardPage> {
 
         if (loading) {
           return SliverToBoxAdapter(
-            child: Container(
-                child: Center(
-                    child:
-                        Loading(indicator: LineScaleIndicator(), size: 40.0))),
-          );
+              child: Container(
+                  child: Center(
+                      child: SizedBox(
+            height: 50.0,
+            child: LoadingIndicator(
+              indicatorType: Indicator.orbit,
+              color: Theme.of(context).accentColor,
+            ),
+          ))));
         }
 
         return SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             LifeEvent lifeEvent = state.events[index];
-            String dateString = DateFormat.MMMd(
-                            Localizations.localeOf(context).languageCode)
-                        .format(lifeEvent.happenedAt);
+            String dateString =
+                DateFormat.MMMd(Localizations.localeOf(context).languageCode)
+                    .format(lifeEvent.happenedAt);
             return ListTile(
               leading: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[Text("$dateString")]),
-                title: Text("${lifeEvent.lifeEventType.name}",
-                    style: Theme.of(context).textTheme.body2),
-                    subtitle: Text("${lifeEvent.contact.firstName} ${lifeEvent.contact.lastName}",
-                    style: Theme.of(context).textTheme.body1),);
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[Text("$dateString")]),
+              title: Text("${lifeEvent.lifeEventType.name}",
+                  style: Theme.of(context).textTheme.body2),
+              subtitle: Text(
+                  "${lifeEvent.contact.firstName} ${lifeEvent.contact.lastName}",
+                  style: Theme.of(context).textTheme.body1),
+            );
           }, childCount: min(10, state.events.length)),
         );
       },
