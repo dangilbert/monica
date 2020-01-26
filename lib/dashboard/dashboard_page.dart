@@ -7,8 +7,10 @@ import 'package:loading/indicator/line_scale_indicator.dart';
 import 'package:loading/loading.dart';
 import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
+import 'package:monica/core/data/model/life_event.dart';
 import 'package:monica/dashboard/bloc/dashboard_bloc.dart';
 import 'package:monica/i18n.dart';
+import 'package:intl/intl.dart';
 import 'package:monica/service/navigation_service.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -41,7 +43,13 @@ class _DashboardPageState extends State<DashboardPage> {
         I18n.of(context).dashboardRecentContacts,
         style: Theme.of(context).textTheme.display1,
       )),
-      _recentContactsItem()
+      _recentContactsItem(),
+      _sectionHeader(
+          child: Text(
+        I18n.of(context).dashboardUpcomingEvents,
+        style: Theme.of(context).textTheme.display1,
+      )),
+      _eventsItem(),
     ];
 
     return Container(
@@ -156,6 +164,42 @@ class _DashboardPageState extends State<DashboardPage> {
                                         .textTheme
                                         .display2))))));
           }, childCount: min(10, state.contacts.length)),
+        );
+      },
+    );
+  }
+
+  Widget _eventsItem() {
+    return StreamBuilder(
+      stream: _bloc.viewState.eventsState,
+      builder: (context, eventsState) {
+        EventsState state = eventsState.data;
+        var loading = !eventsState.hasData || state.loading;
+
+        if (loading) {
+          return SliverToBoxAdapter(
+            child: Container(
+                child: Center(
+                    child:
+                        Loading(indicator: LineScaleIndicator(), size: 40.0))),
+          );
+        }
+
+        return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            LifeEvent lifeEvent = state.events[index];
+            String dateString = DateFormat.MMMd(
+                            Localizations.localeOf(context).languageCode)
+                        .format(lifeEvent.happenedAt);
+            return ListTile(
+              leading: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[Text("$dateString")]),
+                title: Text("${lifeEvent.lifeEventType.name}",
+                    style: Theme.of(context).textTheme.body2),
+                    subtitle: Text("${lifeEvent.contact.firstName} ${lifeEvent.contact.lastName}",
+                    style: Theme.of(context).textTheme.body1),);
+          }, childCount: min(10, state.events.length)),
         );
       },
     );

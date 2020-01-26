@@ -50,14 +50,24 @@ class MonicaClient {
     return false;
   }
 
-  Future<BinaryResult<dynamic>> get(String path, {Map<String, String> headers}) async {
+  Future<BinaryResult<dynamic>> get(String path,
+      {Map<String, String> headers, Map<String, String> params}) async {
     var session = await sessionRepo.getSession();
     if (headers == null) {
       headers = {};
     }
     headers[HttpHeaders.authorizationHeader] = "Bearer ${session.token}";
     try {
-    var response = await client.get("${session.host}/api/$path", headers: headers);
+      var host = session.host.split("://");
+      var scheme = host[0];
+      var authority = host[1];
+      var uri;
+      if (scheme == "http") {
+        uri = Uri.http(authority, "api/$path", params);
+      } else {
+        uri = Uri.https(authority, "api/$path", params);
+      }
+      var response = await client.get(uri, headers: headers);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return BinaryResult.success(value: response.body);
       } else {

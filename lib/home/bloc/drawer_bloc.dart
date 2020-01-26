@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:monica/core/data/user.dart';
+import 'package:monica/core/data/model/user.dart';
 import 'package:monica/user/user_repo.dart';
 
 class DrawerBloc {

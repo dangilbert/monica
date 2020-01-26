@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:monica/auth/session.dart';
+import 'package:monica/core/data/repo/life_events_repo.dart';
+import 'package:monica/core/networking/request/life_events_request.dart';
 import 'package:monica/core/networking/user_request.dart';
 import 'package:monica/dashboard/data/dashboard_repo.dart';
 import 'package:monica/i18n.dart';
@@ -115,6 +117,7 @@ void _initDependencyGraph() {
   GetIt.instance.registerSingleton(sessionRepo);
 
   GetIt.instance.registerLazySingleton(() => ContactsRepo());
+  GetIt.instance.registerLazySingleton(() => LifeEventsRepo());
   GetIt.instance.registerLazySingleton(() => DashboardRepo());
 
   // Register API client/requests
@@ -122,4 +125,5 @@ void _initDependencyGraph() {
   GetIt.instance.registerSingleton(client);
   GetIt.instance.registerSingleton(UserRequest(client: client));
   GetIt.instance.registerLazySingleton(() => ContactsRequest(client: client));
+  GetIt.instance.registerLazySingleton(() => LifeEventsRequest(client: client));
 }

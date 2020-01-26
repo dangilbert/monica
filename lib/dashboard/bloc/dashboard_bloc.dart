@@ -5,33 +5,40 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:monica/core/bloc/bloc.dart';
 import 'package:monica/core/data/model/contact.dart';
+import 'package:monica/core/data/model/life_event.dart';
+import 'package:monica/core/networking/binary_result.dart';
 import 'package:monica/dashboard/data/dashboard_repo.dart';
 
 class DashboardBloc extends Bloc<DashboardBlocViewState,
-  DashboardBlocViewEffect, DashboardBlocViewAction> {
+    DashboardBlocViewEffect, DashboardBlocViewAction> {
   DashboardRepo _repo = GetIt.instance.get();
 
-  bool _loadingContacts = false;
-  bool _loadingActivities = false;
-  bool _loadingGifts = false;
+  bool _loading = false;
   StreamController<DashboardSummary> _dashboardSummary = StreamController();
   StreamController<ContactsState> _contactsState = StreamController();
+  StreamController<EventsState> _eventsState = StreamController();
 
   List<Contact> _contacts = [];
+  List<LifeEvent> _lifeEvents = [];
 
   DashboardBloc() {
     // Start the load of the dashboard data
     _repo.contacts.listen((data) {
       _contacts = data;
-      _buildDashboardSummary();
-      _buildContactsState();
+      _updateDashboard();
+    });
+
+    _repo.lifeEvents.listen((data) {
+      _lifeEvents = data;
+      _updateDashboard();
     });
 
     viewState = DashboardBlocViewState(
         summary: _dashboardSummary.stream,
-        contactsState: _contactsState.stream);
+        contactsState: _contactsState.stream,
+        eventsState: _eventsState.stream);
 
-    _buildDashboardSummary();
+    _updateDashboard();
     _loadData();
   }
 
@@ -54,20 +61,39 @@ class DashboardBloc extends Bloc<DashboardBlocViewState,
   }
 
   void _loadData() async {
-    _loadingContacts = true;
-    var result = await _repo.fetchContacts();
-    result.onFailure(() => effectController.add(LoadingErrorEffect()));
-    _loadingContacts = false;
+    _loading = true;
+    var contactsRequest = _repo.fetchContacts();
+    var lifeEventsRequest = _repo.fetchLifeEvents();
+    var results = await Future.wait([contactsRequest, lifeEventsRequest]);
+    var failure = results.any((result) {
+      return result is BinaryResultFailure;
+    });
+    if (failure) {
+      effectController.add(LoadingErrorEffect());
+    }
+    _loading = false;
+  }
+
+  void _updateDashboard() {
+    _buildDashboardSummary();
+    _buildContactsState();
+    _buildEventsState();
   }
 
   void _buildDashboardSummary() {
     _dashboardSummary.add(DashboardSummary(
-      loading: _loadingContacts || _loadingActivities || _loadingGifts,
-        activitiesCount: 0, contactsCount: _contacts.length, giftsCount: 0));
+        loading: _loading,
+        activitiesCount: 0,
+        contactsCount: _contacts.length,
+        giftsCount: 0));
   }
 
   void _buildContactsState() {
-    _contactsState.add(ContactsState(loading: _loadingContacts, contacts: _contacts));
+    _contactsState.add(ContactsState(loading: _loading, contacts: _contacts));
+  }
+
+  void _buildEventsState() {
+    _eventsState.add(EventsState(loading: _loading, events: _lifeEvents));
   }
 
   @override
@@ -78,9 +104,13 @@ class DashboardBloc extends Bloc<DashboardBlocViewState,
 }
 
 class DashboardBlocViewState {
-  DashboardBlocViewState({@required this.summary, @required this.contactsState});
+  DashboardBlocViewState(
+      {@required this.summary,
+      @required this.contactsState,
+      @required this.eventsState});
   final Stream<DashboardSummary> summary;
   final Stream<ContactsState> contactsState;
+  final Stream<EventsState> eventsState;
 }
 
 @immutable
@@ -103,6 +133,14 @@ class ContactsState {
   final List<Contact> contacts;
 
   ContactsState({@required this.loading, @required this.contacts});
+}
+
+@immutable
+class EventsState {
+  final bool loading;
+  final List<LifeEvent> events;
+
+  EventsState({@required this.loading, @required this.events});
 }
 
 abstract class DashboardBlocViewEffect extends Equatable {}

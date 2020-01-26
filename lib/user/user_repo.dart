@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:get_it/get_it.dart';
-import 'package:monica/core/data/user.dart';
+import 'package:monica/core/data/model/user.dart';
 import 'package:monica/core/networking/binary_result.dart';
 import 'package:monica/core/networking/user_request.dart';
 

@@ -22,7 +22,7 @@ class FakeMonicaClient extends MonicaClient {
   }
 
   @override
-  Future<BinaryResult<dynamic>> get(String path, {Map<String, String> headers}) async {
+  Future<BinaryResult<dynamic>> get(String path, {Map<String, String> headers, Map<String, String> params}) async {
     return BinaryResult.failure(exception: Exception("400 Client Error"));
   }
 }

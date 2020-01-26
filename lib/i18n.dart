@@ -38,6 +38,8 @@ class I18n {
 
   String get contactUnknownBirthdate => _getText("contactUnknownBirthdate");
 
+  String get dashboardUpcomingEvents => _getText("dashboardUpcomingEvents");
+
   static Map<String, String> _localizedValues;
 
   static Map<String, String> _enValues = {
@@ -58,6 +60,7 @@ class I18n {
     "dashboardRecentContacts": "Recent Contacts",
     "dashboardSummary": "Summary",
     "contactUnknownBirthdate": "Birthday not set",
+    "dashboardUpcomingEvents": "Upcoming events",
   };
 
   static Map<String, String> _esValues = {
@@ -79,6 +82,7 @@ class I18n {
     "dashboardRecentContacts": "Contactos Recientes",
     "dashboardSummary": "Resumen",
     "contactUnknownBirthdate": "Fecha de cumpleaños desconocido",
+    "dashboardUpcomingEvents": "Proximos eventos",
   };
 
   static Map<String, Map<String, String>> _allValues = {

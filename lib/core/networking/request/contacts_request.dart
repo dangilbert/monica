@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:monica/core/data/model/contact.dart';
+import 'package:monica/core/data/model/meta.dart';
 import 'package:monica/core/networking/binary_result.dart';
 import 'package:monica/core/networking/client.dart';
 
@@ -13,21 +14,31 @@ class ContactsRequest {
   }
 
   Future<BinaryResult<List<Contact>>> getContacts() async {
-    var result = await _client.get("contacts");
-    if (result is BinaryResultSuccess) {
-      try {
-        var contactsJson = jsonDecode(result.value)['data'];
-        List<Contact> contacts =
-            contactsJson.toList().map<Contact>((contactJson) {
-          return Contact.fromJson(contactJson);
-        }).toList();
-        return BinaryResult.success(value: contacts);
-      } catch (err) {
-        // TODO inject logger
-        return BinaryResult.failure(exception: err);
+    var currentPage = 0;
+    var lastPage = 1;
+    List<Contact> contacts = [];
+    while (currentPage < lastPage) {
+      var result = await _client.get("contacts",
+          params: {"limit": "100", "page": "${currentPage + 1}"});
+      if (result is BinaryResultSuccess) {
+        try {
+          var contactsJson = jsonDecode(result.value)['data'];
+          contacts.addAll(contactsJson.toList().map<Contact>((contactJson) {
+            return Contact.fromJson(contactJson);
+          }).toList());
+
+          var metaJson = jsonDecode(result.value)['meta'];
+          var meta = Meta.fromJson(metaJson);
+          currentPage = meta.currentPage;
+          lastPage = meta.lastPage;
+        } catch (err) {
+          // TODO inject logger
+          return BinaryResult.failure(exception: err);
+        }
+      } else {
+        return BinaryResult.failure();
       }
-    } else {
-      return BinaryResult.failure();
     }
+    return BinaryResult.success(value: contacts);
   }
 }
