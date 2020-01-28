@@ -95,3 +95,5 @@ key.jks
 google-play-service.json
 google-services.json
 GoogleService-Info.plist
+
+coverage_helper_test.dart
