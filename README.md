@@ -6,13 +6,15 @@
 <br />
 <p align="center">
   <a href="https://github.com/dangilbert/monica">
-    <img src="assets/icon/icon.png" alt="Logo" width="80" height="80">
+    <img src="documentation/images/icon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Santa for Monica</h3>
 
   <p align="center">
-    [![codecov](https://codecov.io/gh/dangilbert/monica/branch/master/graph/badge.svg)](https://codecov.io/gh/dangilbert/monica)
+    <a href="https://codecov.io/gh/dangilbert/monica">
+  <img src="https://codecov.io/gh/dangilbert/monica/branch/master/graph/badge.svg" />
+</a>
     <br />
     <a href="https://github.com/dangilbert/monica/issues">Report Bug</a>
     ·
