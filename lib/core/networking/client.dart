@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:monica/auth/session.dart';
-import 'package:monica/core/networking/api_health.dart';
+import 'package:monica/core/data/model/api_health.dart';
 import 'dart:convert';
 
 import 'package:monica/core/networking/binary_result.dart';
@@ -15,6 +15,8 @@ class MonicaClient {
 
   MonicaClient({@required this.sessionRepo});
 
+
+// TODO move login to its own repo
   Future<bool> sessionIsValid() async {
     var session = await sessionRepo.getSession();
     if (session == null) {

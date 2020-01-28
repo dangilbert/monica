@@ -1,5 +1,5 @@
 import 'package:monica/i18n.dart';
-import 'package:monica/login/bloc/login_bloc.dart';
+import 'package:monica/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:monica/auth/session.dart';
 import 'package:monica/core/data/repo/life_events_repo.dart';
 import 'package:monica/core/networking/request/life_events_request.dart';
 import 'package:monica/core/networking/user_request.dart';
-import 'package:monica/dashboard/data/dashboard_repo.dart';
+import 'package:monica/core/data/repo/dashboard_repo.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/new_page.dart';
 import 'package:flutter/foundation.dart';

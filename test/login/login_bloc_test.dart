@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:monica/core/networking/client.dart';
-import 'package:monica/login/bloc/login_bloc.dart';
+import 'package:monica/login/login_bloc.dart';
 import 'package:monica/service/navigation_service.dart';
 import '../fakes/fake_monica_client.dart';
 import '../fakes/fake_navigation_service.dart';
