@@ -97,3 +97,5 @@ google-services.json
 GoogleService-Info.plist
 
 coverage_helper_test.dart
+
+fvm
