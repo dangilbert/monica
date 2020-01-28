@@ -49,7 +49,7 @@ jobs:
       - run: flutter  analyze
       # run  flutter widgets tests  and unit tests
       - name: Force coverage on all dart files in lib
-        run: .github/scripts/fix_coverage.sh
+        run: .github/scripts/fix_coverage.sh monica
       - run: flutter test --coverage
       # Upload coverage reports to Codecov
       # https://github.com/marketplace/actions/codecov
