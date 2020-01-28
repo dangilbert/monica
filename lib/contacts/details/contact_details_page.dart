@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:monica/contacts/details/bloc/contact_details_bloc.dart';
+import 'package:monica/contacts/details/contact_details_bloc.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/i18n.dart';
 
