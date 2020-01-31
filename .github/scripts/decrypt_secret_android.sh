@@ -11,5 +11,3 @@ gpg --quiet --batch --yes --decrypt --passphrase="$GOOGLE_PLAY_SERVICE_ACCOUNT_S
 --output $HOME/secrets/google-play-service.json android/google-play-service.json.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$ANDROID_GOOGLE_JSON_ENCRYPTION_SECRET" \
 --output $HOME/secrets/google-services.json android/app/google-services.json.gpg
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_GOOGLE_PLIST_ENCRYPTION_SECRET" \
---output $HOME/secrets/GoogleService-Info.plist ios/Runner/GoogleService-Info.plist.gpg
