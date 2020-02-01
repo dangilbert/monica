@@ -7,7 +7,7 @@ class BinaryResult<T> {
     return BinaryResultSuccess(value: value);
   }
 
-  factory BinaryResult.failure({Exception exception}) => BinaryResultFailure(exception: exception);
+  factory BinaryResult.failure({dynamic exception}) => BinaryResultFailure(exception: exception);
 
   void onSuccess(Function(T value) action) {
     if (this is BinaryResultSuccess) {
@@ -31,7 +31,7 @@ class BinaryResultSuccess<T> extends BinaryResult<T> {
 
 @immutable
 class BinaryResultFailure<T> extends BinaryResult<T> {
-  final Exception exception;
+  final dynamic exception;
 
   BinaryResultFailure({this.exception});
 }
