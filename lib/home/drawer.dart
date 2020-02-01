@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:monica/auth/session.dart';
 import 'package:monica/core/data/model/user.dart';
-import 'package:monica/home/bloc/drawer_bloc.dart';
+import 'package:monica/home/drawer_bloc.dart';
 import 'package:monica/i18n.dart';
 import 'package:monica/service/navigation_service.dart';
 

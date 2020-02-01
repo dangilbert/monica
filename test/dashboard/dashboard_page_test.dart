@@ -12,21 +12,21 @@ void main() {
   });
 
   testWidgets(
-      'on login tapped, if hostname is invalid, shows snackbar about invalid host',
-      (WidgetTester tester) async {},
-      skip: true);
-
-  testWidgets('on login tapped, with valid hostname, shows loading progress, ',
+      'when bloc exposes stream of 20 contacts, list of 10 most recent contacts is built',
       (WidgetTester tester) async {},
       skip: true);
 
   testWidgets(
-      'on login tapped, if connection failed error occurs, shows snackbar about failed connection, hides loading banner and re-shows login form with input data',
+      'when bloc exposes stream of 4 contacts, list of 4 contacts is built',
+      (WidgetTester tester) async {},
+      skip: true);
+
+  testWidgets('when bloc exposes error effect, snackbar is shown',
       (WidgetTester tester) async {},
       skip: true);
 
   testWidgets(
-      'on login tapped, calls bloc with `LoginBlocViewAction` populated with host and token fields',
+      'when bloc exposes contacts state with loading true, shows a progress bar',
       (WidgetTester tester) async {},
       skip: true);
 }

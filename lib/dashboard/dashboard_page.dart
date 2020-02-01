@@ -7,7 +7,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/core/data/model/life_event.dart';
-import 'package:monica/dashboard/bloc/dashboard_bloc.dart';
+import 'package:monica/dashboard/dashboard_bloc.dart';
 import 'package:monica/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:monica/service/navigation_service.dart';

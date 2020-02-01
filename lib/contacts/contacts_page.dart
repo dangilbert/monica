@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:monica/contacts/bloc/contacts_bloc.dart';
+import 'package:monica/contacts/contacts_bloc.dart';
 import 'package:monica/contacts/details/contact_details_page.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/i18n.dart';
@@ -16,6 +16,7 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
+  // TODO inject this bloc
   ContactsBloc _bloc = ContactsBloc();
   NavigationService _navigationService = GetIt.instance.get();
 

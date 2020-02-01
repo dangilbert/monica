@@ -7,7 +7,7 @@ import 'package:monica/core/bloc/bloc.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/core/data/model/life_event.dart';
 import 'package:monica/core/networking/binary_result.dart';
-import 'package:monica/dashboard/data/dashboard_repo.dart';
+import 'package:monica/core/data/repo/dashboard_repo.dart';
 
 class DashboardBloc extends Bloc<DashboardBlocViewState,
     DashboardBlocViewEffect, DashboardBlocViewAction> {

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:monica/core/data/model/user.dart';
-import 'package:monica/user/user_repo.dart';
+import 'package:monica/core/data/repo/user_repo.dart';
 
 class DrawerBloc {
   UserRepo _userRepo = UserRepo();
