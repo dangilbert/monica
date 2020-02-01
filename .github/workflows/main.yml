@@ -65,7 +65,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build appbundle and ipa
+    name: Build and deploy appbundle
     steps:
       - uses: actions/checkout@v1
       # restore the build id
@@ -126,7 +126,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build appbundle and ipa
+    name: Build and deploy ipa
     steps:
       - uses: actions/checkout@v1
       # restore the build id
