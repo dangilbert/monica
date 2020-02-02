@@ -24,7 +24,7 @@ class User {
 
   static User fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return User(
       data: Data.fromMap(map['data']),
     );
@@ -40,9 +40,8 @@ class User {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is User &&
-      o.data == data;
+
+    return o is User && o.data == data;
   }
 
   @override
@@ -131,7 +130,7 @@ class Data {
 
   static Data fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Data(
       id: map['id'],
       object: map['object'],
@@ -161,38 +160,38 @@ class Data {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Data &&
-      o.id == id &&
-      o.object == object &&
-      o.firstName == firstName &&
-      o.lastName == lastName &&
-      o.email == email &&
-      o.timezone == timezone &&
-      o.currency == currency &&
-      o.locale == locale &&
-      o.isPolicyCompliant == isPolicyCompliant &&
-      o.meContact == meContact &&
-      o.account == account &&
-      o.createdAt == createdAt &&
-      o.updatedAt == updatedAt;
+        o.id == id &&
+        o.object == object &&
+        o.firstName == firstName &&
+        o.lastName == lastName &&
+        o.email == email &&
+        o.timezone == timezone &&
+        o.currency == currency &&
+        o.locale == locale &&
+        o.isPolicyCompliant == isPolicyCompliant &&
+        o.meContact == meContact &&
+        o.account == account &&
+        o.createdAt == createdAt &&
+        o.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      object.hashCode ^
-      firstName.hashCode ^
-      lastName.hashCode ^
-      email.hashCode ^
-      timezone.hashCode ^
-      currency.hashCode ^
-      locale.hashCode ^
-      isPolicyCompliant.hashCode ^
-      meContact.hashCode ^
-      account.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode;
+        object.hashCode ^
+        firstName.hashCode ^
+        lastName.hashCode ^
+        email.hashCode ^
+        timezone.hashCode ^
+        currency.hashCode ^
+        locale.hashCode ^
+        isPolicyCompliant.hashCode ^
+        meContact.hashCode ^
+        account.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode;
   }
 }
 
@@ -238,7 +237,7 @@ class Currency {
 
   static Currency fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Currency(
       id: map['id'],
       object: map['object'],
@@ -260,22 +259,22 @@ class Currency {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Currency &&
-      o.id == id &&
-      o.object == object &&
-      o.iso == iso &&
-      o.name == name &&
-      o.symbol == symbol;
+        o.id == id &&
+        o.object == object &&
+        o.iso == iso &&
+        o.name == name &&
+        o.symbol == symbol;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      object.hashCode ^
-      iso.hashCode ^
-      name.hashCode ^
-      symbol.hashCode;
+        object.hashCode ^
+        iso.hashCode ^
+        name.hashCode ^
+        symbol.hashCode;
   }
 }
 
@@ -301,7 +300,7 @@ class Account {
 
   static Account fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Account(
       id: map['id'],
     );
@@ -317,9 +316,8 @@ class Account {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Account &&
-      o.id == id;
+
+    return o is Account && o.id == id;
   }
 
   @override

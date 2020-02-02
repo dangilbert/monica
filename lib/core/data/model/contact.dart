@@ -82,7 +82,8 @@ class Contact {
       lastCalled: lastCalled ?? this.lastCalled,
       lastActivityTogether: lastActivityTogether ?? this.lastActivityTogether,
       stayInTouchFrequency: stayInTouchFrequency ?? this.stayInTouchFrequency,
-      stayInTouchTriggerDate: stayInTouchTriggerDate ?? this.stayInTouchTriggerDate,
+      stayInTouchTriggerDate:
+          stayInTouchTriggerDate ?? this.stayInTouchTriggerDate,
       information: information ?? this.information,
       addresses: addresses ?? this.addresses,
       tags: tags ?? this.tags,
@@ -119,7 +120,7 @@ class Contact {
 
   static Contact fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Contact(
       id: map['id'],
       object: map['object'],
@@ -130,7 +131,8 @@ class Contact {
       isPartial: map['is_partial'],
       isDead: map['is_dead'],
       // lastCalled: map['lastCalled'],
-      lastActivityTogether: LastActivityTogether.fromMap(map['last_activity_ogether']),
+      lastActivityTogether:
+          LastActivityTogether.fromMap(map['last_activity_ogether']),
       stayInTouchFrequency: map['stay_in_touch_frequency'],
       stayInTouchTriggerDate: map['stay_in_touch_triggerDate'],
       information: Information.fromMap(map['information']),
@@ -155,50 +157,50 @@ class Contact {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Contact &&
-      o.id == id &&
-      o.object == object &&
-      o.firstName == firstName &&
-      o.lastName == lastName &&
-      o.nickname == nickname &&
-      o.gender == gender &&
-      o.isPartial == isPartial &&
-      o.isDead == isDead &&
-      o.lastCalled == lastCalled &&
-      o.lastActivityTogether == lastActivityTogether &&
-      o.stayInTouchFrequency == stayInTouchFrequency &&
-      o.stayInTouchTriggerDate == stayInTouchTriggerDate &&
-      o.information == information &&
-      o.addresses == addresses &&
-      o.tags == tags &&
-      o.statistics == statistics &&
-      o.account == account &&
-      o.createdAt == createdAt &&
-      o.updatedAt == updatedAt;
+        o.id == id &&
+        o.object == object &&
+        o.firstName == firstName &&
+        o.lastName == lastName &&
+        o.nickname == nickname &&
+        o.gender == gender &&
+        o.isPartial == isPartial &&
+        o.isDead == isDead &&
+        o.lastCalled == lastCalled &&
+        o.lastActivityTogether == lastActivityTogether &&
+        o.stayInTouchFrequency == stayInTouchFrequency &&
+        o.stayInTouchTriggerDate == stayInTouchTriggerDate &&
+        o.information == information &&
+        o.addresses == addresses &&
+        o.tags == tags &&
+        o.statistics == statistics &&
+        o.account == account &&
+        o.createdAt == createdAt &&
+        o.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      object.hashCode ^
-      firstName.hashCode ^
-      lastName.hashCode ^
-      nickname.hashCode ^
-      gender.hashCode ^
-      isPartial.hashCode ^
-      isDead.hashCode ^
-      lastCalled.hashCode ^
-      lastActivityTogether.hashCode ^
-      stayInTouchFrequency.hashCode ^
-      stayInTouchTriggerDate.hashCode ^
-      information.hashCode ^
-      addresses.hashCode ^
-      tags.hashCode ^
-      statistics.hashCode ^
-      account.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode;
+        object.hashCode ^
+        firstName.hashCode ^
+        lastName.hashCode ^
+        nickname.hashCode ^
+        gender.hashCode ^
+        isPartial.hashCode ^
+        isDead.hashCode ^
+        lastCalled.hashCode ^
+        lastActivityTogether.hashCode ^
+        stayInTouchFrequency.hashCode ^
+        stayInTouchTriggerDate.hashCode ^
+        information.hashCode ^
+        addresses.hashCode ^
+        tags.hashCode ^
+        statistics.hashCode ^
+        account.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode;
   }
 }
 
@@ -234,7 +236,7 @@ class LastActivityTogether {
 
   static LastActivityTogether fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return LastActivityTogether(
       date: map['date'],
       timezoneType: map['timezone_type'],
@@ -244,19 +246,21 @@ class LastActivityTogether {
 
   String toJson() => json.encode(toMap());
 
-  static LastActivityTogether fromJson(String source) => fromMap(json.decode(source));
+  static LastActivityTogether fromJson(String source) =>
+      fromMap(json.decode(source));
 
   @override
-  String toString() => 'LastActivityTogether date: $date, timezoneType: $timezoneType, timezone: $timezone';
+  String toString() =>
+      'LastActivityTogether date: $date, timezoneType: $timezoneType, timezone: $timezone';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is LastActivityTogether &&
-      o.date == date &&
-      o.timezoneType == timezoneType &&
-      o.timezone == timezone;
+        o.date == date &&
+        o.timezoneType == timezoneType &&
+        o.timezone == timezone;
   }
 
   @override
@@ -269,7 +273,7 @@ class Information {
   Career career;
   Avatar avatar;
   String foodPreferencies;
-  HowYouMet howYouMet;  
+  HowYouMet howYouMet;
   Information({
     // this.relationships,
     this.dates,
@@ -310,7 +314,7 @@ class Information {
 
   static Information fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Information(
       // relationships: // Relationships.fromMap(map['relationships']),
       dates: Dates.fromMap(map['dates']),
@@ -333,24 +337,24 @@ class Information {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Information &&
-      // o.relationships == relationships &&
-      o.dates == dates &&
-      o.career == career &&
-      o.avatar == avatar &&
-      o.foodPreferencies == foodPreferencies &&
-      o.howYouMet == howYouMet;
+        // o.relationships == relationships &&
+        o.dates == dates &&
+        o.career == career &&
+        o.avatar == avatar &&
+        o.foodPreferencies == foodPreferencies &&
+        o.howYouMet == howYouMet;
   }
 
   @override
   int get hashCode {
     // return relationships.hashCode ^
-      return dates.hashCode ^
-      career.hashCode ^
-      avatar.hashCode ^
-      foodPreferencies.hashCode ^
-      howYouMet.hashCode;
+    return dates.hashCode ^
+        career.hashCode ^
+        avatar.hashCode ^
+        foodPreferencies.hashCode ^
+        howYouMet.hashCode;
   }
 }
 
@@ -381,10 +385,11 @@ class Love {
 
   static Love fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Love(
       total: map['total'],
-      contacts: List<Contact>.from(map['contacts']?.map((x) => Contact.fromMap(x))),
+      contacts:
+          List<Contact>.from(map['contacts']?.map((x) => Contact.fromMap(x))),
     );
   }
 
@@ -398,10 +403,8 @@ class Love {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Love &&
-      o.total == total &&
-      o.contacts == contacts;
+
+    return o is Love && o.total == total && o.contacts == contacts;
   }
 
   @override
@@ -435,7 +438,7 @@ class Dates {
 
   static Dates fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Dates(
       birthdate: Birthdate.fromMap(map['birthdate']),
       deceasedDate: Birthdate.fromMap(map['deceased_date']),
@@ -447,15 +450,16 @@ class Dates {
   static Dates fromJson(String source) => fromMap(json.decode(source));
 
   @override
-  String toString() => 'Dates birthdate: $birthdate, deceasedDate: $deceasedDate';
+  String toString() =>
+      'Dates birthdate: $birthdate, deceasedDate: $deceasedDate';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Dates &&
-      o.birthdate == birthdate &&
-      o.deceasedDate == deceasedDate;
+        o.birthdate == birthdate &&
+        o.deceasedDate == deceasedDate;
   }
 
   @override
@@ -489,7 +493,7 @@ class Career {
 
   static Career fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Career(
       job: map['job'],
       company: map['company'],
@@ -506,10 +510,8 @@ class Career {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Career &&
-      o.job == job &&
-      o.company == company;
+
+    return o is Career && o.job == job && o.company == company;
   }
 
   @override
@@ -543,7 +545,7 @@ class Avatar {
 
   static Avatar fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Avatar(
       url: map['url'],
       source: map['source'],
@@ -560,10 +562,8 @@ class Avatar {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Avatar &&
-      o.url == url &&
-      o.source == source;
+
+    return o is Avatar && o.url == url && o.source == source;
   }
 
   @override
@@ -588,7 +588,8 @@ class HowYouMet {
     return HowYouMet(
       generalInformation: generalInformation ?? this.generalInformation,
       firstMetDate: firstMetDate ?? this.firstMetDate,
-      firstMetThroughContact: firstMetThroughContact ?? this.firstMetThroughContact,
+      firstMetThroughContact:
+          firstMetThroughContact ?? this.firstMetThroughContact,
     );
   }
 
@@ -602,11 +603,12 @@ class HowYouMet {
 
   static HowYouMet fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return HowYouMet(
       generalInformation: map['general_information'],
       firstMetDate: Birthdate.fromMap(map['first_met_date']),
-      firstMetThroughContact: FirstMetThroughContact.fromMap(map['first_met_through_contact']),
+      firstMetThroughContact:
+          FirstMetThroughContact.fromMap(map['first_met_through_contact']),
     );
   }
 
@@ -615,20 +617,24 @@ class HowYouMet {
   static HowYouMet fromJson(String source) => fromMap(json.decode(source));
 
   @override
-  String toString() => 'HowYouMet generalInformation: $generalInformation, firstMetDate: $firstMetDate, firstMetThroughContact: $firstMetThroughContact';
+  String toString() =>
+      'HowYouMet generalInformation: $generalInformation, firstMetDate: $firstMetDate, firstMetThroughContact: $firstMetThroughContact';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is HowYouMet &&
-      o.generalInformation == generalInformation &&
-      o.firstMetDate == firstMetDate &&
-      o.firstMetThroughContact == firstMetThroughContact;
+        o.generalInformation == generalInformation &&
+        o.firstMetDate == firstMetDate &&
+        o.firstMetThroughContact == firstMetThroughContact;
   }
 
   @override
-  int get hashCode => generalInformation.hashCode ^ firstMetDate.hashCode ^ firstMetThroughContact.hashCode;
+  int get hashCode =>
+      generalInformation.hashCode ^
+      firstMetDate.hashCode ^
+      firstMetThroughContact.hashCode;
 }
 
 class FirstMetThroughContact {
@@ -698,7 +704,7 @@ class FirstMetThroughContact {
 
   static FirstMetThroughContact fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return FirstMetThroughContact(
       id: map['id'],
       object: map['object'],
@@ -715,7 +721,8 @@ class FirstMetThroughContact {
 
   String toJson() => json.encode(toMap());
 
-  static FirstMetThroughContact fromJson(String source) => fromMap(json.decode(source));
+  static FirstMetThroughContact fromJson(String source) =>
+      fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -725,32 +732,32 @@ class FirstMetThroughContact {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is FirstMetThroughContact &&
-      o.id == id &&
-      o.object == object &&
-      o.firstName == firstName &&
-      o.lastName == lastName &&
-      o.nickname == nickname &&
-      o.gender == gender &&
-      o.isPartial == isPartial &&
-      o.isDead == isDead &&
-      o.information == information &&
-      o.account == account;
+        o.id == id &&
+        o.object == object &&
+        o.firstName == firstName &&
+        o.lastName == lastName &&
+        o.nickname == nickname &&
+        o.gender == gender &&
+        o.isPartial == isPartial &&
+        o.isDead == isDead &&
+        o.information == information &&
+        o.account == account;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      object.hashCode ^
-      firstName.hashCode ^
-      lastName.hashCode ^
-      nickname.hashCode ^
-      gender.hashCode ^
-      isPartial.hashCode ^
-      isDead.hashCode ^
-      information.hashCode ^
-      account.hashCode;
+        object.hashCode ^
+        firstName.hashCode ^
+        lastName.hashCode ^
+        nickname.hashCode ^
+        gender.hashCode ^
+        isPartial.hashCode ^
+        isDead.hashCode ^
+        information.hashCode ^
+        account.hashCode;
   }
 }
 
@@ -786,7 +793,7 @@ class Birthdate {
 
   static Birthdate fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Birthdate(
       isAgeBased: map['is_age_based'],
       isYearUnknown: map['is_year_unknown'],
@@ -799,20 +806,22 @@ class Birthdate {
   static Birthdate fromJson(String source) => fromMap(json.decode(source));
 
   @override
-  String toString() => 'Birthdate isAgeBased: $isAgeBased, isYearUnknown: $isYearUnknown, date: $date';
+  String toString() =>
+      'Birthdate isAgeBased: $isAgeBased, isYearUnknown: $isYearUnknown, date: $date';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Birthdate &&
-      o.isAgeBased == isAgeBased &&
-      o.isYearUnknown == isYearUnknown &&
-      o.date == date;
+        o.isAgeBased == isAgeBased &&
+        o.isYearUnknown == isYearUnknown &&
+        o.date == date;
   }
 
   @override
-  int get hashCode => isAgeBased.hashCode ^ isYearUnknown.hashCode ^ date.hashCode;
+  int get hashCode =>
+      isAgeBased.hashCode ^ isYearUnknown.hashCode ^ date.hashCode;
 }
 
 class Account {
@@ -837,7 +846,7 @@ class Account {
 
   static Account fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Account(
       id: map['id'],
     );
@@ -853,9 +862,8 @@ class Account {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is Account &&
-      o.id == id;
+
+    return o is Account && o.id == id;
   }
 
   @override
@@ -914,7 +922,7 @@ class Statistics {
 
   static Statistics fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Statistics(
       numberOfCalls: map['number_of_calls'],
       numberOfNotes: map['number_of_notes'],
@@ -938,25 +946,25 @@ class Statistics {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Statistics &&
-      o.numberOfCalls == numberOfCalls &&
-      o.numberOfNotes == numberOfNotes &&
-      o.numberOfActivities == numberOfActivities &&
-      o.numberOfReminders == numberOfReminders &&
-      o.numberOfTasks == numberOfTasks &&
-      o.numberOfGifts == numberOfGifts &&
-      o.numberOfDebts == numberOfDebts;
+        o.numberOfCalls == numberOfCalls &&
+        o.numberOfNotes == numberOfNotes &&
+        o.numberOfActivities == numberOfActivities &&
+        o.numberOfReminders == numberOfReminders &&
+        o.numberOfTasks == numberOfTasks &&
+        o.numberOfGifts == numberOfGifts &&
+        o.numberOfDebts == numberOfDebts;
   }
 
   @override
   int get hashCode {
     return numberOfCalls.hashCode ^
-      numberOfNotes.hashCode ^
-      numberOfActivities.hashCode ^
-      numberOfReminders.hashCode ^
-      numberOfTasks.hashCode ^
-      numberOfGifts.hashCode ^
-      numberOfDebts.hashCode;
+        numberOfNotes.hashCode ^
+        numberOfActivities.hashCode ^
+        numberOfReminders.hashCode ^
+        numberOfTasks.hashCode ^
+        numberOfGifts.hashCode ^
+        numberOfDebts.hashCode;
   }
 }
