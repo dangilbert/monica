@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Format the lib directory
+flutter format lib
