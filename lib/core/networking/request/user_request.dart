@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:monica/core/data/model/user.dart';
 import 'package:monica/core/networking/binary_result.dart';
