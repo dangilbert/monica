@@ -14,7 +14,7 @@ abstract class Bloc<T, E, A> {
   }
 
   @mustCallSuper
-  dispose() async {
+  Future<void> dispose() async {
     await effectController.close();
   }
 

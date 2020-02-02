@@ -30,10 +30,10 @@ class ContactDetailsBloc extends Bloc<ContactDetailsBlocViewState,
   }
 
   @override
-  dispose() {
-    _contactStreamController.close();
-    _repo.dispose();
-    return super.dispose();
+  Future<void> dispose() async {
+    await _contactStreamController.close();
+    await _repo.dispose();
+    return await super.dispose();
   }
 
   @override

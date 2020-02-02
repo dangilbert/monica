@@ -54,7 +54,7 @@ class ContactsRepo {
     return result;
   }
 
-  void dispose() {
+  Future<void> dispose() async {
     _contactStreamControllers.values
         .forEach((controller) => controller.close());
     _contactStreamControllers.clear();

@@ -87,4 +87,16 @@ void main() {
       expect(await subject.loadContact(3), isInstanceOf<BinaryResultFailure>());
     },
   );
+
+  test('on dispose closes and clears the individual contact streams', () async {
+    var subject = ContactsRepo();
+
+    var result = expectLater(subject.contact(contact1.id), emitsDone);
+    var result2 = expectLater(subject.contact(contact2.id), emitsDone);
+
+    await subject.dispose();
+
+    await result;
+    await result2;
+  });
 }
