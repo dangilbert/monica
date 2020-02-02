@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:monica/core/data/model/account.dart';
+import 'package:monica/core/data/model/currency.dart';
 import 'package:monica/core/data/model/user.dart';
 
 void main() {
