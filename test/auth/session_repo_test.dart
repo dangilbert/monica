@@ -7,12 +7,13 @@ import '../fakes/fake_flutter_secure_storage.dart';
 
 void main() {
 
-  FlutterSecureStorage secureStorage = FakeFlutterSecureStorage();
+  FakeFlutterSecureStorage secureStorage = FakeFlutterSecureStorage();
 
   Session testSession = Session(host: "host", token: "token");
 
   setUp((){
-    GetIt.instance.registerSingleton(secureStorage);
+    //ignore: unnecessary_cast
+    GetIt.instance.registerSingleton(secureStorage as FlutterSecureStorage);
   });
 
   tearDown(() async {
@@ -40,5 +41,13 @@ test('get session returns valid session when session has been stored', () async 
 
     await subject.logout();
     expect(await subject.getSession(), null);
+  });
+
+  test('set session writes session values to storage', () async {
+    var subject = SessionRepo();
+    await subject.setSession(Session(host: "host", token: "token"));
+
+    expect(secureStorage.store[SessionRepo.HOST_KEY], "host");
+    expect(secureStorage.store[SessionRepo.TOKEN_KEY], "token");
   });
 }
