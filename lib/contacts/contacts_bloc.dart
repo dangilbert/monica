@@ -18,9 +18,11 @@ class ContactsBloc extends Bloc<ContactsBlocViewState, ContactsBlocViewEffect,
     _repo.contacts.listen((contacts) {
       _contacts = contacts;
       _contacts.sort((a, b) {
-        var comparison = a.lastName.toLowerCase().compareTo(b.lastName.toLowerCase());
+        var comparison =
+            a.lastName.toLowerCase().compareTo(b.lastName.toLowerCase());
         if (comparison == 0) {
-          comparison = a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase());
+          comparison =
+              a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase());
         }
         return comparison;
       });

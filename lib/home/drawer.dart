@@ -8,13 +8,13 @@ import 'package:monica/i18n.dart';
 import 'package:monica/service/navigation_service.dart';
 
 class MonicaDrawer extends StatefulWidget {
-  
   final Function(String page) pageCallback;
 
   MonicaDrawer({@required this.pageCallback});
 
   @override
-  _MonicaDrawerState createState() => _MonicaDrawerState(pageCallback: pageCallback);
+  _MonicaDrawerState createState() =>
+      _MonicaDrawerState(pageCallback: pageCallback);
 }
 
 class _MonicaDrawerState extends State<MonicaDrawer> {

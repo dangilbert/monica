@@ -11,8 +11,7 @@ class NewPage extends StatelessWidget {
     return Scaffold(
       appBar: new AppBar(
         title: new Text(title),
-        elevation:
-              defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
+        elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
       ),
       body: new Center(
         child: new Text(title),

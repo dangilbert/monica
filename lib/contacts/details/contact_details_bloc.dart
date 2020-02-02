@@ -16,14 +16,13 @@ class ContactDetailsBloc extends Bloc<ContactDetailsBlocViewState,
   Contact _contact;
   bool _loading;
 
-
   ContactDetailsBloc({@required this.contactId}) {
     _repo.contact(contactId).listen((contact) {
       _contact = contact;
       _buildViewState();
     });
-    viewState =
-        ContactDetailsBlocViewState(contactState: _contactStreamController.stream.asBroadcastStream());
+    viewState = ContactDetailsBlocViewState(
+        contactState: _contactStreamController.stream.asBroadcastStream());
 
     _buildViewState();
     _loadData();
@@ -45,21 +44,22 @@ class ContactDetailsBloc extends Bloc<ContactDetailsBlocViewState,
     _loading = true;
     _buildViewState();
     var result = await _repo.loadContact(contactId);
-    result.onFailure(() => effectController.add(ContactDetailsErrorLoadingContactViewEffect()));
+    result.onFailure(() =>
+        effectController.add(ContactDetailsErrorLoadingContactViewEffect()));
     _loading = false;
     _buildViewState();
   }
 
   void _buildViewState() {
-          var state = ContactState(loading: _loading, contact: _contact);
-          _contactStreamController.add(state);
+    var state = ContactState(loading: _loading, contact: _contact);
+    _contactStreamController.add(state);
   }
 }
 
 @immutable
 class ContactState {
   final bool loading;
-  final Contact contact; 
+  final Contact contact;
 
   ContactState({@required this.loading, @required this.contact});
 }
@@ -74,4 +74,6 @@ class ContactDetailsBlocViewState {
 abstract class ContactDetailsBlocViewAction {}
 
 abstract class ContactDetailsBlocViewEffect {}
-class ContactDetailsErrorLoadingContactViewEffect extends ContactDetailsBlocViewEffect {}
+
+class ContactDetailsErrorLoadingContactViewEffect
+    extends ContactDetailsBlocViewEffect {}

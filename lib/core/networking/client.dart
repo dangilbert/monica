@@ -15,7 +15,6 @@ class MonicaClient {
 
   MonicaClient({@required this.sessionRepo});
 
-
 // TODO move login to its own repo
   Future<bool> sessionIsValid() async {
     var session = await sessionRepo.getSession();

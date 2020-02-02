@@ -39,7 +39,8 @@ class LoginBloc {
     LoginTappedViewAction tapAction = action;
     _loading.add(true);
     if (_isValidDomain(tapAction.host)) {
-      var result = await _client.login(host: tapAction.host, token: tapAction.token);
+      var result =
+          await _client.login(host: tapAction.host, token: tapAction.token);
       if (result) {
         _navigationService.navigateToReplacing(Routes.Home);
       } else {
@@ -54,13 +55,14 @@ class LoginBloc {
   bool _isValidDomain(String host) {
     var regex = VerbalExpression()
       ..startOfLine()
-      ..then("http")..maybe("s")
+      ..then("http")
+      ..maybe("s")
       ..then("://")
       ..maybe("www.")
       ..anythingBut(" ")
       ..endOfLine();
 
-      return regex.hasMatch(host);
+    return regex.hasMatch(host);
   }
 }
 
@@ -71,10 +73,12 @@ class LoginBlocViewState {
 }
 
 abstract class LoginBlocViewEffect extends Equatable {}
+
 class LoginBlocInvalidHostError extends LoginBlocViewEffect {
   @override
   List<Object> get props => [];
 }
+
 class LoginBlocConnectionFailedError extends LoginBlocViewEffect {
   @override
   List<Object> get props => [];

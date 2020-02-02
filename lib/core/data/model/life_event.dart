@@ -29,7 +29,9 @@ class LifeEvent {
     object = json['object'];
     name = json['name'];
     note = json['note'];
-    happenedAt = json['happened_at'] != null ? DateTime.parse(json['happened_at']) : null;
+    happenedAt = json['happened_at'] != null
+        ? DateTime.parse(json['happened_at'])
+        : null;
     lifeEventType = json['life_event_type'] != null
         ? new LifeEventType.fromJson(json['life_event_type'])
         : null;

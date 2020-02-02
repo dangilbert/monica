@@ -6,18 +6,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 class Session extends Equatable {
-  
   final String host;
   final String token;
 
-  Session({ @required this.host, @required this.token });
+  Session({@required this.host, @required this.token});
 
   @override
   List<Object> get props => [host, token];
 }
 
 class SessionRepo {
-
   static const String HOST_KEY = "host_key";
   static const String TOKEN_KEY = "token_key";
 
@@ -41,5 +39,4 @@ class SessionRepo {
   Future<void> logout() async {
     await _storage.deleteAll();
   }
-
 }

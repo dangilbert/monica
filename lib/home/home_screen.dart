@@ -7,13 +7,12 @@ import 'package:monica/new_page.dart';
 import 'package:monica/service/navigation_service.dart';
 
 class HomePage extends StatefulWidget {
-    @override
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
-static Map<String, Widget> _pages = {
+  static Map<String, Widget> _pages = {
     Routes.dashboard: DashboardPage(),
     Routes.contacts: ContactsPage(),
     Routes.gallery: NewPage("Gallery"),
@@ -23,7 +22,6 @@ static Map<String, Widget> _pages = {
 
   Widget _currentPage = _pages[Routes.dashboard];
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -32,16 +30,17 @@ static Map<String, Widget> _pages = {
           elevation:
               defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
         ),
-        drawer: MonicaDrawer(pageCallback: (page) { _changePage(page); }),
+        drawer: MonicaDrawer(pageCallback: (page) {
+          _changePage(page);
+        }),
         body: new Container(
           child: _currentPage,
         ));
   }
 
-void _changePage(String page) {
-  setState(() {
-    _currentPage = _pages[page];
-  });
-}
-  
+  void _changePage(String page) {
+    setState(() {
+      _currentPage = _pages[page];
+    });
+  }
 }

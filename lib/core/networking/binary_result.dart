@@ -7,7 +7,8 @@ class BinaryResult<T> {
     return BinaryResultSuccess(value: value);
   }
 
-  factory BinaryResult.failure({dynamic exception}) => BinaryResultFailure(exception: exception);
+  factory BinaryResult.failure({dynamic exception}) =>
+      BinaryResultFailure(exception: exception);
 
   void onSuccess(Function(T value) action) {
     if (this is BinaryResultSuccess) {

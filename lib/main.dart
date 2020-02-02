@@ -93,7 +93,8 @@ class MyApp extends StatelessWidget {
                 fullscreenDialog: true, builder: (_) => LoginPage());
           case Routes.contactDetails:
             ContactDetailsPageArgs args = settings.arguments;
-            return MaterialPageRoute(builder: (_) => ContactDetailsPage(contactId: args.id));
+            return MaterialPageRoute(
+                builder: (_) => ContactDetailsPage(contactId: args.id));
         }
         var page = settings.name.startsWith('/page/')
             ? NewPage(settings.name.substring(6))

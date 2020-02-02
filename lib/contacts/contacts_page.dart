@@ -45,11 +45,11 @@ class _ContactsPageState extends State<ContactsPage> {
             Container(
                 child: Center(
                     child: SizedBox(
-                      height: 50.0,
+                        height: 50.0,
                         child: LoadingIndicator(
-              indicatorType: Indicator.orbit,
-              color: Theme.of(context).accentColor,
-            ))))
+                          indicatorType: Indicator.orbit,
+                          color: Theme.of(context).accentColor,
+                        ))))
           ];
         } else {
           items = state.contacts.map<Widget>((contact) {

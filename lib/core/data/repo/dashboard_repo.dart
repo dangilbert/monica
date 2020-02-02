@@ -1,5 +1,3 @@
-
-
 import 'package:get_it/get_it.dart';
 import 'package:monica/core/data/model/contact.dart';
 import 'package:monica/core/data/model/life_event.dart';
@@ -8,7 +6,6 @@ import 'package:monica/core/data/repo/life_events_repo.dart';
 import 'package:monica/core/networking/binary_result.dart';
 
 class DashboardRepo {
-
   ContactsRepo _contactsRepo = GetIt.instance.get();
   LifeEventsRepo _lifeEventsRepo = GetIt.instance.get();
   Stream<List<Contact>> contacts;
@@ -26,5 +23,4 @@ class DashboardRepo {
   Future<BinaryResult<void>> fetchLifeEvents() async {
     return await _lifeEventsRepo.loadLifeEvents();
   }
-
 }
