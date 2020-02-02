@@ -16,7 +16,7 @@ class UserRequest {
     var result = await _client.get("me");
     if (result is BinaryResultSuccess) {
       try {
-        var user = User.fromJson(jsonDecode(result.value));
+        var user = User.fromJson(result.value);
         return BinaryResult.success(value: user);
       } catch (err) {
         print(err);
