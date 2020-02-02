@@ -53,6 +53,8 @@ void main() {
       updatedAt: "2020-01-25T15:59:01Z",
   );
 
+  var testUserString = "User id: 1, object: user, first_name: Test, last_name: User, email: test@test.com, timezone: Europe/Madrid, currency: Currency id: 4, object: currency, iso: EUR, name: Euro, symbol: \u20ac, locale: en, is_policy_compliant: true, me_contact: null, account: Account id: 3, created_at: 2019-10-06T12:25:31Z, updated_at: 2020-01-25T15:59:01Z";
+
   test('valid user json decoded correctly', () async {
     expect(User.fromJson(testUserJson), testUser);
   });
@@ -65,5 +67,9 @@ void main() {
     var user1 = testUser;
     var user2 = testUser.copyWith();
     expect(user1.hashCode, user2.hashCode);
+  });
+
+  test('toString is valid', () async {
+    expect(testUser.toString(), testUserString);
   });
 }

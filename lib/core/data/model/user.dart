@@ -111,7 +111,7 @@ class User {
 
   @override
   String toString() {
-    return 'Data id: $id, object: $object, first_name: $firstName, last_name: $lastName, email: $email, timezone: $timezone, currency: $currency, locale: $locale, is_policy_compliant: $isPolicyCompliant, me_contact: $meContact, account: $account, created_at: $createdAt, updated_at: $updatedAt';
+    return 'User id: $id, object: $object, first_name: $firstName, last_name: $lastName, email: $email, timezone: $timezone, currency: $currency, locale: $locale, is_policy_compliant: $isPolicyCompliant, me_contact: $meContact, account: $account, created_at: $createdAt, updated_at: $updatedAt';
   }
 
   @override
