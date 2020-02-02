@@ -91,7 +91,7 @@ class Data {
     Contact meContact,
     Account account,
     String createdAt,
-    String updated_at,
+    String updatedAt,
   }) {
     return Data(
       id: id ?? this.id,
@@ -106,7 +106,7 @@ class Data {
       meContact: meContact ?? this.meContact,
       account: account ?? this.account,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updated_at ?? this.updatedAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
