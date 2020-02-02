@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:monica/core/data/model/account.dart';
-import 'package:monica/core/data/model/contact/dates.dart';
 import 'package:monica/core/data/model/contact/information.dart';
 import 'package:monica/core/data/model/contact/last_activity_together.dart';
 import 'package:monica/core/data/model/contact/statistics.dart';

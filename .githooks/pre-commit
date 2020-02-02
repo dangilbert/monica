@@ -2,3 +2,4 @@
 
 # Format the lib directory
 flutter format --set-exit-if-changed lib
+flutter analyze
