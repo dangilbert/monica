@@ -18,7 +18,6 @@ class Meta {
     this.total,
   });
 
-
   Meta copyWith({
     int currentPage,
     int from,
@@ -53,7 +52,7 @@ class Meta {
 
   static Meta fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Meta(
       currentPage: map['current_page'],
       from: map['from'],
@@ -77,25 +76,25 @@ class Meta {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Meta &&
-      o.currentPage == currentPage &&
-      o.from == from &&
-      o.lastPage == lastPage &&
-      o.path == path &&
-      o.perPage == perPage &&
-      o.to == to &&
-      o.total == total;
+        o.currentPage == currentPage &&
+        o.from == from &&
+        o.lastPage == lastPage &&
+        o.path == path &&
+        o.perPage == perPage &&
+        o.to == to &&
+        o.total == total;
   }
 
   @override
   int get hashCode {
     return currentPage.hashCode ^
-      from.hashCode ^
-      lastPage.hashCode ^
-      path.hashCode ^
-      perPage.hashCode ^
-      to.hashCode ^
-      total.hashCode;
+        from.hashCode ^
+        lastPage.hashCode ^
+        path.hashCode ^
+        perPage.hashCode ^
+        to.hashCode ^
+        total.hashCode;
   }
 }

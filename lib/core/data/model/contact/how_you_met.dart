@@ -40,8 +40,7 @@ class HowYouMet {
     return HowYouMet(
       generalInformation: map['general_information'],
       firstMetDate: Birthdate.fromMap(map['first_met_date']),
-      firstMetThroughContact:
-          Contact.fromMap(map['first_met_through_contact']),
+      firstMetThroughContact: Contact.fromMap(map['first_met_through_contact']),
     );
   }
 

@@ -32,8 +32,7 @@ class LifeEventType {
     lifeEventCategory = json['life_event_category'] != null
         ? new LifeEventCategory.fromJson(json['life_event_category'])
         : null;
-    account =
-        json['account'] != null ? Account.fromMap(json['account']) : null;
+    account = json['account'] != null ? Account.fromMap(json['account']) : null;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

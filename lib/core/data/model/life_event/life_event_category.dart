@@ -26,8 +26,7 @@ class LifeEventCategory {
     name = json['name'];
     coreMonicaData = json['core_monica_data'];
     defaultLifeEventCategoryKey = json['default_life_event_category_key'];
-    account =
-        json['account'] != null ? Account.fromMap(json['account']) : null;
+    account = json['account'] != null ? Account.fromMap(json['account']) : null;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

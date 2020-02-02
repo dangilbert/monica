@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class Links {
-
   String first;
   String last;
   String prev;
@@ -38,7 +37,7 @@ class Links {
 
   static Links fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return Links(
       first: map['first'],
       last: map['last'],
@@ -59,19 +58,16 @@ class Links {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is Links &&
-      o.first == first &&
-      o.last == last &&
-      o.prev == prev &&
-      o.next == next;
+        o.first == first &&
+        o.last == last &&
+        o.prev == prev &&
+        o.next == next;
   }
 
   @override
   int get hashCode {
-    return first.hashCode ^
-      last.hashCode ^
-      prev.hashCode ^
-      next.hashCode;
+    return first.hashCode ^ last.hashCode ^ prev.hashCode ^ next.hashCode;
   }
 }

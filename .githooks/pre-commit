@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # Format the lib directory
-flutter format lib
+flutter format --set-exit-if-changed lib
