@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:get_it/get_it.dart';
 import 'package:monica/core/data/model/user.dart';
 import 'package:monica/core/networking/binary_result.dart';
-import 'package:monica/core/networking/user_request.dart';
+import 'package:monica/core/networking/request/user_request.dart';
 
 class UserRepo {
   UserRequest _request = GetIt.instance.get();
