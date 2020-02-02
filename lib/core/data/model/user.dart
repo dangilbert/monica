@@ -1,54 +1,10 @@
 import 'dart:convert';
 
+import 'package:monica/core/data/model/account.dart';
+
 import 'contact.dart';
 
 class User {
-  Data data;
-  User({
-    this.data,
-  });
-
-  User copyWith({
-    Data data,
-  }) {
-    return User(
-      data: data ?? this.data,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'data': data.toMap(),
-    };
-  }
-
-  static User fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return User(
-      data: Data.fromMap(map['data']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  static User fromJson(String source) => fromMap(json.decode(source));
-
-  @override
-  String toString() => 'User data: $data';
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is User && o.data == data;
-  }
-
-  @override
-  int get hashCode => data.hashCode;
-}
-
-class Data {
   int id;
   String object;
   String firstName;
@@ -62,7 +18,7 @@ class Data {
   Account account;
   String createdAt;
   String updatedAt;
-  Data({
+  User({
     this.id,
     this.object,
     this.firstName,
@@ -78,7 +34,7 @@ class Data {
     this.updatedAt,
   });
 
-  Data copyWith({
+  User copyWith({
     int id,
     String object,
     String firstName,
@@ -93,7 +49,7 @@ class Data {
     String createdAt,
     String updatedAt,
   }) {
-    return Data(
+    return User(
       id: id ?? this.id,
       object: object ?? this.object,
       firstName: firstName ?? this.firstName,
@@ -128,10 +84,10 @@ class Data {
     };
   }
 
-  static Data fromMap(Map<String, dynamic> map) {
+  static User fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Data(
+    return User(
       id: map['id'],
       object: map['object'],
       firstName: map['first_name'],
@@ -150,7 +106,7 @@ class Data {
 
   String toJson() => json.encode(toMap());
 
-  static Data fromJson(String source) => fromMap(json.decode(source));
+  static User fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -161,7 +117,7 @@ class Data {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Data &&
+    return o is User &&
         o.id == id &&
         o.object == object &&
         o.firstName == firstName &&
@@ -276,50 +232,4 @@ class Currency {
         name.hashCode ^
         symbol.hashCode;
   }
-}
-
-class Account {
-  int id;
-  Account({
-    this.id,
-  });
-
-  Account copyWith({
-    int id,
-  }) {
-    return Account(
-      id: id ?? this.id,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-    };
-  }
-
-  static Account fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return Account(
-      id: map['id'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  static Account fromJson(String source) => fromMap(json.decode(source));
-
-  @override
-  String toString() => 'Account id: $id';
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is Account && o.id == id;
-  }
-
-  @override
-  int get hashCode => id.hashCode;
 }

@@ -11,7 +11,7 @@ void main() {
   
   FakeUserRequest userRequest;
 
-  User user1 = User(data: Data(id: 1, firstName: "Test1"));
+  User user1 = User(id: 1, firstName: "Test1");
 
   setUp(() async {
     userRequest = FakeUserRequest();

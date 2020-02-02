@@ -1,13 +1,13 @@
 class ApiHealth {
   Success success;
-  Links links;
+  ApiLinks links;
 
   ApiHealth({this.success, this.links});
 
   ApiHealth.fromJson(Map<String, dynamic> json) {
     success =
         json['success'] != null ? new Success.fromJson(json['success']) : null;
-    links = json['links'] != null ? new Links.fromJson(json['links']) : null;
+    links = json['links'] != null ? new ApiLinks.fromJson(json['links']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -38,7 +38,7 @@ class Success {
   }
 }
 
-class Links {
+class ApiLinks {
   String activitiesUrl;
   String addressesUrl;
   String callsUrl;
@@ -52,7 +52,7 @@ class Links {
   String relationshipsUrl;
   String statisticsUrl;
 
-  Links(
+  ApiLinks(
       {this.activitiesUrl,
       this.addressesUrl,
       this.callsUrl,
@@ -66,7 +66,7 @@ class Links {
       this.relationshipsUrl,
       this.statisticsUrl});
 
-  Links.fromJson(Map<String, dynamic> json) {
+  ApiLinks.fromJson(Map<String, dynamic> json) {
     activitiesUrl = json['activities_url'];
     addressesUrl = json['addresses_url'];
     callsUrl = json['calls_url'];

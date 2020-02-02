@@ -28,7 +28,7 @@ class ContactsRequest {
           }).toList());
 
           var metaJson = jsonDecode(result.value)['meta'];
-          var meta = Meta.fromJson(metaJson);
+          var meta = Meta.fromMap(metaJson);
           currentPage = meta.currentPage;
           lastPage = meta.lastPage;
         } catch (err) {

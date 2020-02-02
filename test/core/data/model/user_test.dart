@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:monica/core/data/model/account.dart';
 import 'package:monica/core/data/model/user.dart';
 
 void main() {
   var testUserJson = '''
   {
-  "data": {
     "id": 1,
     "object": "user",
     "first_name": "Test",
@@ -29,11 +29,9 @@ void main() {
     "created_at": "2019-10-06T12:25:31Z",
     "updated_at": "2020-01-25T15:59:01Z"
   }
-}
   ''';
 
   var testUser = User(
-    data: Data(
       id: 1,
       object: "user",
       firstName: "Test",
@@ -52,7 +50,6 @@ void main() {
       account: Account(id: 3),
       createdAt: "2019-10-06T12:25:31Z",
       updatedAt: "2020-01-25T15:59:01Z",
-    ),
   );
 
   test('valid user json decoded correctly', () async {

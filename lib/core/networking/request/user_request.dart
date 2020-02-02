@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:monica/core/data/model/user.dart';
 import 'package:monica/core/networking/binary_result.dart';
@@ -14,7 +16,9 @@ class UserRequest {
     var result = await _client.get("me");
     if (result is BinaryResultSuccess) {
       try {
-        var user = User.fromJson(result.value);
+        var resultJson = jsonDecode(result.value);
+
+        var user = User.fromMap(resultJson['data']);
         return BinaryResult.success(value: user);
       } catch (err) {
         print(err);

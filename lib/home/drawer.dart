@@ -143,11 +143,11 @@ class _MonicaDrawerState extends State<MonicaDrawer> {
 
   Widget _userHeader(User user) {
     return UserAccountsDrawerHeader(
-      accountName: Text("${user.data.firstName} ${user.data.lastName}"),
-      accountEmail: Text(user.data.email),
+      accountName: Text("${user.firstName} ${user.lastName}"),
+      accountEmail: Text(user.email),
       currentAccountPicture: CircleAvatar(
         backgroundColor: Colors.red,
-        child: Text(user.data.firstName.substring(0, 1)),
+        child: Text(user.firstName.substring(0, 1)),
       ),
       margin: EdgeInsets.zero,
     );
