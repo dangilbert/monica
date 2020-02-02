@@ -60,4 +60,10 @@ void main() {
   test('user toJson renders user correctly', () async {
     expect(jsonDecode(testUser.toJson()), jsonDecode(testUserJson));
   });
+
+  test('hashcode matches', () async {
+    var user1 = testUser;
+    var user2 = testUser.copyWith();
+    expect(user1.hashCode, user2.hashCode);
+  });
 }
