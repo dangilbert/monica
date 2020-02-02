@@ -57,4 +57,18 @@ void main() {
     expectLater((navigationService as FakeNavigationService).routes,
         emits(Routes.Home));
   });
+
+  test('dispose closes the effect stream', () async {
+    var subject = LoginBloc();
+    var result = expectLater(subject.effect, emitsDone);
+    subject.dispose();
+    await result;
+  });
+
+  test('dispose closes the loading stream', () async {
+    var subject = LoginBloc();
+    var result = expectLater(subject.viewState.loading, emitsInOrder([false, emitsDone]));
+    subject.dispose();
+    await result;
+  });
 }
