@@ -180,5 +180,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v1
         with:
-          path: /tmp/spaceship*.log
+          path: /tmp/
           name: logs
