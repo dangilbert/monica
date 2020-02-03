@@ -168,7 +168,7 @@ jobs:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
         with:
           # The lane that should be executed.
           lane: beta
