@@ -24,7 +24,11 @@ platform :ios do
       keychain_name: "ci_keychain",
       keychain_password: "password"
     )
-    build_ios_app(workspace: "Runner.xcworkspace", scheme: "Runner", export_method: "app-store")
+    build_ios_app(
+      workspace: "Runner.xcworkspace", 
+      scheme: "Runner", 
+      export_method: "app-store"
+    )
     upload_to_testflight
   end
 end
