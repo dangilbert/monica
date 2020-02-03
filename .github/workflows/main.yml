@@ -145,11 +145,6 @@ jobs:
         with:
           flutter-version: '1.12.14'
           channel: 'dev'
-      # This action sets up a java environment
-      # https://github.com/actions/setup-java
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
       - run: flutter pub get
       # build iOS version
       - name: Decrypt  firebase config
@@ -173,6 +168,7 @@ jobs:
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
         with:
           # The lane that should be executed.
           lane: beta
