@@ -181,3 +181,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           path: /tmp/spaceship*.log
+          name: logs
