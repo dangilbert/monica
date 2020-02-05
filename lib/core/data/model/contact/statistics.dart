@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 class Statistics {
-  int numberOfCalls;
-  int numberOfNotes;
-  int numberOfActivities;
-  int numberOfReminders;
-  int numberOfTasks;
-  int numberOfGifts;
-  int numberOfDebts;
+  final int numberOfCalls;
+  final int numberOfNotes;
+  final int numberOfActivities;
+  final int numberOfReminders;
+  final int numberOfTasks;
+  final int numberOfGifts;
+  final int numberOfDebts;
   Statistics({
     this.numberOfCalls,
     this.numberOfNotes,
@@ -54,13 +54,13 @@ class Statistics {
     if (map == null) return null;
 
     return Statistics(
-      numberOfCalls: map['number_of_calls'],
-      numberOfNotes: map['number_of_notes'],
-      numberOfActivities: map['number_of_activities'],
-      numberOfReminders: map['number_of_reminders'],
-      numberOfTasks: map['number_of_tasks'],
-      numberOfGifts: map['number_of_gifts'],
-      numberOfDebts: map['number_of_debts'],
+      numberOfCalls: map['number_of_calls']?.toInt(),
+      numberOfNotes: map['number_of_notes']?.toInt(),
+      numberOfActivities: map['number_of_activities']?.toInt(),
+      numberOfReminders: map['number_of_reminders']?.toInt(),
+      numberOfTasks: map['number_of_tasks']?.toInt(),
+      numberOfGifts: map['number_of_gifts']?.toInt(),
+      numberOfDebts: map['number_of_debts']?.toInt(),
     );
   }
 
@@ -70,7 +70,7 @@ class Statistics {
 
   @override
   String toString() {
-    return 'Statistics numberOfCalls: $numberOfCalls, numberOfNotes: $numberOfNotes, numberOfActivities: $numberOfActivities, numberOfReminders: $numberOfReminders, numberOfTasks: $numberOfTasks, numberOfGifts: $numberOfGifts, numberOfDebts: $numberOfDebts';
+    return 'Statistics number_of_calls: $numberOfCalls, number_of_notes: $numberOfNotes, number_of_activities: $numberOfActivities, number_of_reminders: $numberOfReminders, number_of_tasks: $numberOfTasks, number_of_gifts: $numberOfGifts, number_of_debts: $numberOfDebts';
   }
 
   @override

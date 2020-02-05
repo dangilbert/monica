@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:monica/core/data/model/contact/birthdate.dart';
+import 'package:monica/core/data/model/contact/monica_date.dart';
 
 class Dates {
-  Birthdate birthdate;
-  Birthdate deceasedDate;
+  final MonicaDate birthdate;
+  final MonicaDate deceasedDate;
   Dates({
     this.birthdate,
     this.deceasedDate,
   });
 
   Dates copyWith({
-    Birthdate birthdate,
-    Birthdate deceasedDate,
+    MonicaDate birthdate,
+    MonicaDate deceasedDate,
   }) {
     return Dates(
       birthdate: birthdate ?? this.birthdate,
@@ -31,8 +31,8 @@ class Dates {
     if (map == null) return null;
 
     return Dates(
-      birthdate: Birthdate.fromMap(map['birthdate']),
-      deceasedDate: Birthdate.fromMap(map['deceased_date']),
+      birthdate: MonicaDate.fromMap(map['birthdate']),
+      deceasedDate: MonicaDate.fromMap(map['deceased_date']),
     );
   }
 
@@ -42,7 +42,7 @@ class Dates {
 
   @override
   String toString() =>
-      'Dates birthdate: $birthdate, deceasedDate: $deceasedDate';
+      'Dates birthdate: $birthdate, deceased_date: $deceasedDate';
 
   @override
   bool operator ==(Object o) {

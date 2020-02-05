@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 class Career {
-  Null job;
-  Null company;
+  final String job;
+  final String company;
   Career({
     this.job,
     this.company,
   });
 
   Career copyWith({
-    Null job,
-    Null company,
+    String job,
+    String company,
   }) {
     return Career(
       job: job ?? this.job,

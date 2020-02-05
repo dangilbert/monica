@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:monica/core/data/model/contact.dart';
-import 'package:monica/core/data/model/contact/birthdate.dart';
+import 'package:monica/core/data/model/contact/monica_date.dart';
 
 class HowYouMet {
-  String generalInformation;
-  Birthdate firstMetDate;
-  Contact firstMetThroughContact;
+  final String generalInformation;
+  final MonicaDate firstMetDate;
+  final Contact firstMetThroughContact;
   HowYouMet({
     this.generalInformation,
     this.firstMetDate,
@@ -15,7 +15,7 @@ class HowYouMet {
 
   HowYouMet copyWith({
     String generalInformation,
-    Birthdate firstMetDate,
+    MonicaDate firstMetDate,
     Contact firstMetThroughContact,
   }) {
     return HowYouMet(
@@ -39,7 +39,7 @@ class HowYouMet {
 
     return HowYouMet(
       generalInformation: map['general_information'],
-      firstMetDate: Birthdate.fromMap(map['first_met_date']),
+      firstMetDate: MonicaDate.fromMap(map['first_met_date']),
       firstMetThroughContact: Contact.fromMap(map['first_met_through_contact']),
     );
   }
@@ -50,7 +50,7 @@ class HowYouMet {
 
   @override
   String toString() =>
-      'HowYouMet generalInformation: $generalInformation, firstMetDate: $firstMetDate, firstMetThroughContact: $firstMetThroughContact';
+      'How_you_met general_information: $generalInformation, first_met_date: $firstMetDate, first_met_through_contact: $firstMetThroughContact';
 
   @override
   bool operator ==(Object o) {

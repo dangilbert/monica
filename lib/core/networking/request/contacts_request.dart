@@ -24,7 +24,7 @@ class ContactsRequest {
         try {
           var contactsJson = jsonDecode(result.value)['data'];
           contacts.addAll(contactsJson.toList().map<Contact>((contactJson) {
-            return Contact.fromJson(jsonEncode(contactJson));
+            return Contact.fromMap(contactJson);
           }).toList());
 
           var metaJson = jsonDecode(result.value)['meta'];
