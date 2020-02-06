@@ -117,7 +117,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: santa-release.aab
-          path: build/app/outputs/bundle/release/app-release.aab
+          path: build/app/outputs/bundle/release
       - name: Decrypt signing key and firebase config
         run: ./.github/scripts/decrypt_secret_android.sh
         env:
@@ -142,7 +142,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build and deploy ipa
+    name: Build ipa
     steps:
       - uses: actions/checkout@v1
       # restore the build id
@@ -198,15 +198,11 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: santa-release-signed.ipa
-          path: build/ios/Runner.ipa
-      - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '1.12.14'
-          channel: 'dev'
-      - run: flutter pub get
+          path: ios
       - name: Fastlane Deploy iOS Testflight
         uses: maierj/fastlane-action@v1.2.0
         env:
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
         with:
           # The lane that should be executed.
