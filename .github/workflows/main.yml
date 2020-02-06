@@ -115,7 +115,7 @@ jobs:
     on:
       create:
         tags:
-          - *
+          - '*'
     - uses: actions/download-artifact@v1
     with:
     name: santa-release.aab
@@ -175,7 +175,7 @@ jobs:
     on:
       create:
         tags:
-          - *
+          - '*'
     - uses: actions/download-artifact@v1
         with:
         name: santa-release-unsigned.app
