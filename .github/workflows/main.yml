@@ -20,7 +20,7 @@ jobs:
           # store the build id to github cache
           path: ${{ github.workspace }}/.build-id
           # use the build id to generate a completly unique cache
-          key: ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}-${{ steps.build_id.outputs.id }}
+          key: ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}
       - name: 'Save build id'
         # store the build id to a folder that we can later cache.
         run: |
