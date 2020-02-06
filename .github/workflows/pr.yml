@@ -2,7 +2,6 @@
 name:  PR Build and Test
 # Trigger the workflow on push or pull request
 on:
-  push:
   pull_request:
 #A workflow run is made up of one or more jobs. Jobs run in parallel by default.
 jobs:
