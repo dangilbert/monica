@@ -62,7 +62,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build appbundle
+    name: Build appbundle for Android
     steps:
       - uses: actions/checkout@v1
       # restore the build id
@@ -113,7 +113,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build and deploy ipa
+    name: Build .app for iOS
     steps:
       - uses: actions/checkout@v1
       # restore the build id

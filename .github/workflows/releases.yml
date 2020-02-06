@@ -112,7 +112,8 @@ jobs:
     needs: [build_android_release]
     runs-on: macos-latest
     name: Deploy Android to Play Store
-    steps: 
+    steps:
+      - uses: actions/checkout@v1
       - uses: actions/download-artifact@v1
         with:
           name: santa-release.aab
@@ -171,6 +172,7 @@ jobs:
     needs: [build_ios_release]
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v1
       - uses: actions/download-artifact@v1
         with:
           name: santa-release-unsigned.app
