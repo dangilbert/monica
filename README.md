@@ -12,7 +12,7 @@
   <img src="https://codecov.io/gh/dangilbert/monica/branch/master/graph/badge.svg" />
 </a>
 <a href="https://github.com/dangilbert/monica/actions">
-  <img src="https://github.com/dangilbert/monica/workflows/Test,%20build%20and%20deploy/badge.svg">
+  <img src="https://github.com/dangilbert/monica/workflows/master/badge.svg">
 </a>
     <br />
     <a href="https://github.com/dangilbert/monica/issues">Report Bug</a>
