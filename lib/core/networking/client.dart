@@ -62,6 +62,10 @@ class MonicaClient {
       var host = session.host.split("://");
       var scheme = host[0];
       var authority = host[1];
+
+      if (authority.endsWith("/")) {
+        authority = authority.substring(0, authority.length - 1);
+      }
       var uri;
       if (scheme == "http") {
         uri = Uri.http(authority, "api/$path", params);
