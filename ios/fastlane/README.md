@@ -16,16 +16,16 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
+### ios build
+```
+fastlane ios build
+```
+Build signed IPA
 ### ios beta
 ```
 fastlane ios beta
 ```
 Push a new beta build to TestFlight
-### ios matching
-```
-fastlane ios matching
-```
-Run match with envvars
 
 ----
 

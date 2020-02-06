@@ -15,28 +15,27 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Push a new beta build to TestFlight"
-  lane :beta do
+  desc "Build signed IPA"
+  lane :build do
     setup_project
-    match(
-      git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], 
-      readonly: true,
-      keychain_name: "ci_keychain",
-      keychain_password: "password"
-    )
-    build_ios_app(
-      workspace: "Runner.xcworkspace", 
-      scheme: "Runner", 
-      export_method: "app-store"
-    )
-    upload_to_testflight
+      match(
+        git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], 
+        readonly: true,
+        keychain_name: "ci_keychain",
+        keychain_password: "password"
+      )
+      build_ios_app(
+        workspace: "Runner.xcworkspace", 
+        scheme: "Runner", 
+        export_method: "app-store"
+      )
   end
 end
 
 platform :ios do
-  desc "Run match with envvars"
-  lane :matching do
-    match(git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'], verbose: true)
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    upload_to_testflight
   end
 end
 

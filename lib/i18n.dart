@@ -76,7 +76,7 @@ class I18n {
     "loginErrorHostnameInvalid":
         "¡Uyyy! El nombre del servidor parece incorrecto",
     "loginErrorConnectionFailed":
-        "Looks like something went wrong. Check your internet connection and API Key",
+        "Parece que algo ha salido mal. Comprueba tu conexión de internet",
     "coreLoading": "Cargando",
     "coreNoData": "Sin datos",
     "dashboardRecentContacts": "Contactos Recientes",
