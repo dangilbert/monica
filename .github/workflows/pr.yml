@@ -156,4 +156,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: santa-release-signed.ipa
-          path: build/ios/Runner.ipa
+          path: ios/Runner.ipa

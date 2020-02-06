@@ -189,7 +189,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: santa-release-signed.ipa
-          path: build/ios/Runner.ipa
+          path: ios/Runner.ipa
   deploy_ios_to_testflight:
     needs: [build_ios_release]
     runs-on: macos-latest

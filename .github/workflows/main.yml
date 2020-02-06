@@ -113,7 +113,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build .app for iOS
+    name: Build .ipa for iOS
     steps:
       - uses: actions/checkout@v1
       # restore the build id
@@ -160,4 +160,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: santa-release-signed.ipa
-          path: build/ios/Runner.ipa
+          path: ios/Runner.ipa
