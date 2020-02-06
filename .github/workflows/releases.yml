@@ -101,6 +101,8 @@ jobs:
           mv $HOME/secrets/key.properties $GITHUB_WORKSPACE/android/key.properties
           mv $HOME/secrets/google-play-service.json $GITHUB_WORKSPACE/android/google-play-service.json
           mv $HOME/secrets/google-services.json $GITHUB_WORKSPACE/android/app/google-services.json
+      - name: Print build number
+        run: cat .build-id/id
       - name: Build Android app
         run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --build-number=`cat .build-id/id`
       - name: Archive android app bundle
@@ -170,6 +172,8 @@ jobs:
       - name: Move decrypted files to their correct locations
         run: |
           mv $HOME/secrets/GoogleService-Info.plist $GITHUB_WORKSPACE/ios/Runner/GoogleService-Info.plist
+      - name: Print build number
+        run: cat .build-id/id
       # build iOS version
       - name: Build Unsigned iOS App
         run: flutter build ios --release --no-codesign --build-number=`cat .build-id/id`
