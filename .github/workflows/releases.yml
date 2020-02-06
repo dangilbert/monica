@@ -114,18 +114,18 @@ jobs:
     name: Deploy Android to Play Store
     steps: 
       - uses: actions/download-artifact@v1
-      with:
-      name: santa-release.aab
-      path: build/app/outputs/bundle/release/app-release.aab
+        with:
+        name: santa-release.aab
+        path: build/app/outputs/bundle/release/app-release.aab
       - name: Fastlane Deploy Android Internal
-          uses: maierj/fastlane-action@v1.2.0
-          with:
-            # The lane that should be executed.
-            lane: internal
-            # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
-            subdirectory: android
-            # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
-            skip-tracking: true
+        uses: maierj/fastlane-action@v1.2.0
+        with:
+          # The lane that should be executed.
+          lane: internal
+          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+          subdirectory: android
+          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+          skip-tracking: true
   build_ios_release:
     #if conditional to prevent a job from r
     runs-on: macos-latest
@@ -172,9 +172,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/download-artifact@v1
-          with:
-          name: santa-release-unsigned.app
-          path: build/ios/iphoneos/Runner.app
+        with:
+        name: santa-release-unsigned.app
+        path: build/ios/iphoneos/Runner.app
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.12.14'
