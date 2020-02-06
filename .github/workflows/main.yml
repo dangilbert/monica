@@ -144,8 +144,20 @@ jobs:
       # build iOS version
       - name: Build Unsigned iOS App
         run: flutter build ios --release --no-codesign --build-number=`cat .build-id/id`
+      - name: Sign iOS App
+        uses: maierj/fastlane-action@v1.2.0
+        env:
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        with:
+          # The lane that should be executed.
+          lane: build
+          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+          subdirectory: ios
+          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+          skip-tracking: true
       - name: Archive iOS app
         uses: actions/upload-artifact@v1
         with:
-          name: santa-release-unsigned.app
-          path: build/ios/iphoneos/Runner.app
+          name: santa-release-signed.ipa
+          path: build/ios/Runner.ipa
