@@ -10,25 +10,17 @@ jobs:
   build_id:
     runs-on: macos-latest
     steps:
-      - name: 'Set build id'
-        id: build_id
-        # add a step output `steps.build_id.outputs.id` as the unique id
-        run: echo "::set-output name=id::$(date +%s)"
-      - name: 'Cache .build-id'
-        uses: actions/cache@v1
+      - name: Generate build number
+        uses: einaregilsson/build-number@v2 
         with:
-          # store the build id to github cache
-          path: ${{ github.workspace }}/.build-id
-          # use the build id to generate a completly unique cache
-          key: ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}
-      - name: 'Save build id'
-        # store the build id to a folder that we can later cache.
-        run: |
-          mkdir -p .build-id 
-          echo $BUILD_ID > .build-id/id
-          cat .build-id/id
-        env:
-          BUILD_ID: ${{ steps.build_id.outputs.id }}
+          token: ${{secrets.github_token}}        
+      - name: Print new build number
+        run: echo "Build number is $BUILD_NUMBER"
+      - name: Upload build number
+        uses: actions/upload-artifact@v1
+        with:
+          name: BUILD_NUMBER
+          path: BUILD_NUMBER
   test:
     #The type of machine to run the job on. [windows,macos, ubuntu , self-hosted]
     runs-on: macos-latest
@@ -67,17 +59,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       # restore the build id
-      - name: 'Cache .build-id'
-        uses: actions/cache@v1
+      - name: Download build number
+        uses: actions/download-artifact@v1
         with:
-          path: ${{ github.workspace }}/.build-id
-          key: ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}
-      # set the build id from the restored cache
-      - name: 'Set build id'
-        id: build_id
-        run: echo "::set-output name=id::$(cat .build-id/id)"
+          name: BUILD_NUMBER
+      - name: Restore build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v2
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.12.14'
@@ -105,7 +93,7 @@ jobs:
       - name: Print build number
         run: cat .build-id/id
       - name: Build Android app
-        run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --build-number=`cat .build-id/id`
+        run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --build-number=${{ steps.buildnumber.outputs.build_number }}
       - name: Archive android app bundle
         uses: actions/upload-artifact@v1
         with:
@@ -149,17 +137,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       # restore the build id
-      - name: 'Cache .build-id'
-        uses: actions/cache@v1
+      - name: Download build number
+        uses: actions/download-artifact@v1
         with:
-          path: ${{ github.workspace }}/.build-id
-          key: ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-build-id-${{ github.head_ref }}-${{ github.sha }}
-      # set the build id from the restored cache
-      - name: 'Set build id'
-        id: build_id
-        run: echo "::set-output name=id::$(cat .build-id/id)"
+          name: BUILD_NUMBER
+      - name: Restore build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v2
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.12.14'
@@ -177,7 +161,7 @@ jobs:
         run: cat .build-id/id
       # build iOS version
       - name: Build Unsigned iOS App
-        run: flutter build ios --release --no-codesign --build-number=`cat .build-id/id`
+        run: flutter build ios --release --no-codesign --build-number=${{ steps.buildnumber.outputs.build_number }}
       - name: Sign iOS App
         uses: maierj/fastlane-action@v1.2.0
         env:
