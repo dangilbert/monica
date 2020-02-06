@@ -2,10 +2,9 @@
 name:  Test, build and deploy
 # Trigger the workflow on push or pull request
 on:
-  push:
-    branches:
-      - master
-  pull_request:
+  create:
+    tags:
+      - *
 #A workflow run is made up of one or more jobs. Jobs run in parallel by default.
 jobs:
   build_id:
@@ -111,6 +110,22 @@ jobs:
         with:
           name: santa-release.aab
           path: build/app/outputs/bundle/release/app-release.aab
+  deploy_android_appbundle:
+    needs: [build_android_release]
+    runs-on: macos-latest
+    - uses: actions/download-artifact@v1
+    with:
+    name: santa-release.aab
+    path: build/app/outputs/bundle/release/app-release.aab
+    - name: Fastlane Deploy Android Internal
+        uses: maierj/fastlane-action@v1.2.0
+        with:
+          # The lane that should be executed.
+          lane: internal
+          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+          subdirectory: android
+          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+          skip-tracking: true
   build_ios_release:
     #if conditional to prevent a job from running
     if: github.event_name != 'pull_request'
@@ -153,3 +168,35 @@ jobs:
         with:
           name: santa-release-unsigned.app
           path: build/ios/iphoneos/Runner.app
+  deploy_ios_to_testflight:
+    needs: [build_ios_release]
+    runs-on: macos-latest
+    - uses: actions/download-artifact@v1
+        with:
+        name: santa-release-unsigned.app
+        path: build/ios/iphoneos/Runner.app
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '1.12.14'
+        channel: 'dev'
+    - run: flutter pub get
+    - name: Fastlane Deploy iOS Testflight
+      uses: maierj/fastlane-action@v1.2.0
+      env:
+        MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+      with:
+        # The lane that should be executed.
+        lane: beta
+        # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+        subdirectory: ios
+        # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+        skip-tracking: true
+    - name: archive logs
+      if: failure()
+      uses: actions/upload-artifact@v1
+      with:
+        path: /tmp/
+        name: logs
