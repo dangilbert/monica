@@ -4,7 +4,7 @@ name:  Deploy tagged build
 on:
   create:
     tags:
-      - *
+      - '*'
 #A workflow run is made up of one or more jobs. Jobs run in parallel by default.
 jobs:
   build_id:
