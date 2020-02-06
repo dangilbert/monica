@@ -25,8 +25,7 @@ platform :android do
   lane :internal do
     upload_to_play_store(
       track: 'internal', 
-      aab: "../build/app/outputs/bundle/release/app-release.aab",
-      release_status: 'draft'
+      aab: "../build/app/outputs/bundle/release/app-release.aab"
     )
   end
 
