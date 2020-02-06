@@ -1,12 +1,11 @@
 #The name of your workflow.
 name:  PR Build and Test
-# Trigger the workflow on push or pull request
+# Trigger the workflow on pull request
 on:
   pull_request:
 #A workflow run is made up of one or more jobs. Jobs run in parallel by default.
 jobs:
   build_id:
-    if: github.event_name != 'pull_request'
     runs-on: macos-latest
     steps:
       - name: 'Set build id'
@@ -57,8 +56,6 @@ jobs:
           file: coverage/lcov.info
 
   build_android_release:
-    #if conditional to prevent a job from running
-    if: github.event_name != 'pull_request'
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
@@ -109,8 +106,6 @@ jobs:
           name: santa-release.aab
           path: build/app/outputs/bundle/release/app-release.aab
   build_ios_release:
-    #if conditional to prevent a job from running
-    if: github.event_name != 'pull_request'
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
