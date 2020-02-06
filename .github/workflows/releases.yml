@@ -186,10 +186,10 @@ jobs:
           # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
           skip-tracking: true
       - name: Archive iOS app
-      uses: actions/upload-artifact@v1
-      with:
-        name: santa-release-signed.ipa
-        path: build/ios/Runner.ipa
+        uses: actions/upload-artifact@v1
+        with:
+          name: santa-release-signed.ipa
+          path: build/ios/Runner.ipa
   deploy_ios_to_testflight:
     needs: [build_ios_release]
     runs-on: macos-latest
