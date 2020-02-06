@@ -65,7 +65,7 @@ jobs:
     runs-on: macos-latest
     #Identifies any jobs that must complete successfully before this job will run.
     needs: [build_id,test]
-    name: Build and deploy appbundle
+    name: Build appbundle
     steps:
       - uses: actions/checkout@v1
       # restore the build id
@@ -106,7 +106,21 @@ jobs:
           mv $HOME/secrets/google-services.json $GITHUB_WORKSPACE/android/app/google-services.json
       - name: Build Android app
         run: flutter build appbundle --release --target-platform android-arm,android-arm64,android-x64 --build-number=`cat .build-id/id`
-      - name: Fastlane Deploy Android Internal
+      - name: Archive android app bundle
+        uses: actions/upload-artifact@v1
+        with:
+          name: santa-release.aab
+          path: build/app/outputs/bundle/release/app-release.aab
+  deploy_android_appbundle:
+    on:
+      create:
+        tags:
+          - *
+    - uses: actions/download-artifact@v1
+    with:
+    name: santa-release.aab
+    path: build/app/outputs/bundle/release/app-release.aab
+    - name: Fastlane Deploy Android Internal
         uses: maierj/fastlane-action@v1.2.0
         with:
           # The lane that should be executed.
@@ -115,11 +129,6 @@ jobs:
           subdirectory: android
           # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
           skip-tracking: true
-      - name: Archive android app bundle
-        uses: actions/upload-artifact@v1
-        with:
-          name: santa-release.aab
-          path: build/app/outputs/bundle/release/app-release.aab
   build_ios_release:
     #if conditional to prevent a job from running
     if: github.event_name != 'pull_request'
@@ -162,23 +171,37 @@ jobs:
         with:
           name: santa-release-unsigned.app
           path: build/ios/iphoneos/Runner.app
-      - name: Fastlane Deploy iOS Testflight
-        uses: maierj/fastlane-action@v1.2.0
-        env:
-          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-          FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+  deploy_ios_to_testflight:
+    on:
+      create:
+        tags:
+          - *
+    - uses: actions/download-artifact@v1
         with:
-          # The lane that should be executed.
-          lane: beta
-          # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
-          subdirectory: ios
-          # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
-          skip-tracking: true
-      - name: archive logs
-        if: failure()
-        uses: actions/upload-artifact@v1
-        with:
-          path: /tmp/
-          name: logs
+        name: santa-release-unsigned.app
+        path: build/ios/iphoneos/Runner.app
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '1.12.14'
+        channel: 'dev'
+    - run: flutter pub get
+    - name: Fastlane Deploy iOS Testflight
+      uses: maierj/fastlane-action@v1.2.0
+      env:
+        MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTH }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+      with:
+        # The lane that should be executed.
+        lane: beta
+        # The relative path from the project root directory to the subdirectory where the fastlane folder is located.
+        subdirectory: ios
+        # The action tracks usage in Firebase by default. You can disable tracking by setting this parameter to 'true'.
+        skip-tracking: true
+    - name: archive logs
+      if: failure()
+      uses: actions/upload-artifact@v1
+      with:
+        path: /tmp/
+        name: logs
