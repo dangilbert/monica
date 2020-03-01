@@ -22,11 +22,16 @@ class MonicaDate {
     );
   }
 
+  String _toISO8601DateNoMillis(DateTime dateTime) {
+    var isoString = dateTime.toIso8601String();
+    return "${isoString.split(".")[0]}Z";
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'is_age_based': isAgeBased,
       'is_year_unknown': isYearUnknown,
-      'date': date.millisecondsSinceEpoch,
+      'date': date != null ? _toISO8601DateNoMillis(date) : null
     };
   }
 

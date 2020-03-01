@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-class Work {
+class Relationship {
   final int total;
   final List<dynamic> contacts;
-  Work({
+  Relationship({
     this.total,
     this.contacts,
   });
 
-  Work copyWith({
+  Relationship copyWith({
     int total,
     List<dynamic> contacts,
   }) {
-    return Work(
+    return Relationship(
       total: total ?? this.total,
       contacts: contacts ?? this.contacts,
     );
@@ -25,10 +25,10 @@ class Work {
     };
   }
 
-  static Work fromMap(Map<String, dynamic> map) {
+  static Relationship fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Work(
+    return Relationship(
       total: map['total']?.toInt(),
       contacts: List<dynamic>.from(map['contacts']),
     );
@@ -36,16 +36,16 @@ class Work {
 
   String toJson() => json.encode(toMap());
 
-  static Work fromJson(String source) => fromMap(json.decode(source));
+  static Relationship fromJson(String source) => fromMap(json.decode(source));
 
   @override
-  String toString() => 'Work total: $total, contacts: $contacts';
+  String toString() => 'Love total: $total, contacts: $contacts';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Work && o.total == total && o.contacts == contacts;
+    return o is Relationship && o.total == total && o.contacts == contacts;
   }
 
   @override

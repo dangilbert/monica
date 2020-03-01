@@ -29,8 +29,8 @@ class HowYouMet {
   Map<String, dynamic> toMap() {
     return {
       'general_information': generalInformation,
-      'first_met_date': firstMetDate.toMap(),
-      'first_met_through_contact': firstMetThroughContact.toMap(),
+      'first_met_date': firstMetDate?.toMap(),
+      'first_met_through_contact': firstMetThroughContact?.toMap(),
     };
   }
 

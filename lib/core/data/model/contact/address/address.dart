@@ -85,10 +85,10 @@ class Address {
       'postal_code': postalCode,
       'latitude': latitude,
       'longitude': longitude,
-      'country': country.toMap(),
+      'country': country?.toMap(),
       'url': url,
-      'account': account.toMap(),
-      'contact': contact.toMap(),
+      'account': account?.toMap(),
+      'contact': contact?.toMap(),
       'created_at': createdAt,
       'updated_at': updatedAt,
     };

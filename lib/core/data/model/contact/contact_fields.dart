@@ -53,7 +53,7 @@ class ContactField {
       'content': content,
       'contact_field_type': contactFieldType.toMap(),
       'account': account.toMap(),
-      'contact': contact.toMap(),
+      'contact': contact?.toMap(),
       'created_at': createdAt,
       'updated_at': updatedAt,
     };

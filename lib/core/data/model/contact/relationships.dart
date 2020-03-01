@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-import 'package:monica/core/data/model/contact/relationships/family.dart';
-import 'package:monica/core/data/model/contact/relationships/friend.dart';
-import 'package:monica/core/data/model/contact/relationships/love.dart';
-import 'package:monica/core/data/model/contact/relationships/work.dart';
+import 'package:monica/core/data/model/contact/relationships/relationship.dart';
 
 class Relationships {
-  final Love love;
-  final Family family;
-  final Friend friend;
-  final Work work;
+  final Relationship love;
+  final Relationship family;
+  final Relationship friend;
+  final Relationship work;
   Relationships({
     this.love,
     this.family,
@@ -18,10 +15,10 @@ class Relationships {
   });
 
   Relationships copyWith({
-    Love love,
-    Family family,
-    Friend friend,
-    Work work,
+    Relationship love,
+    Relationship family,
+    Relationship friend,
+    Relationship work,
   }) {
     return Relationships(
       love: love ?? this.love,
@@ -44,10 +41,10 @@ class Relationships {
     if (map == null) return null;
 
     return Relationships(
-      love: Love.fromMap(map['love']),
-      family: Family.fromMap(map['family']),
-      friend: Friend.fromMap(map['friend']),
-      work: Work.fromMap(map['work']),
+      love: Relationship.fromMap(map['love']),
+      family: Relationship.fromMap(map['family']),
+      friend: Relationship.fromMap(map['friend']),
+      work: Relationship.fromMap(map['work']),
     );
   }
 

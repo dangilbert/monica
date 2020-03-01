@@ -62,7 +62,7 @@ class Note {
       'favorited_at': favoritedAt,
       'url': url,
       'account': account.toMap(),
-      'contact': contact.toMap(),
+      'contact': contact?.toMap(),
       'created_at': createdAt,
       'updated_at': updatedAt,
     };
