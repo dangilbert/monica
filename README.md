@@ -27,6 +27,8 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/807b9976100b4017aefe58d1fbc77834)](https://app.codacy.com/manual/dangilbert/monica?utm_source=github.com&utm_medium=referral&utm_content=dangilbert/monica&utm_campaign=Badge_Grade_Settings)
+
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
