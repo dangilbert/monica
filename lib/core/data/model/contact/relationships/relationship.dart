@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:collection/collection.dart';
 
 class Relationship {
   final int total;
@@ -39,13 +40,15 @@ class Relationship {
   static Relationship fromJson(String source) => fromMap(json.decode(source));
 
   @override
-  String toString() => 'Love total: $total, contacts: $contacts';
+  String toString() => 'Relationship total: $total, contacts: $contacts';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Relationship && o.total == total && o.contacts == contacts;
+    return o is Relationship &&
+        o.total == total &&
+        ListEquality().equals(o.contacts, contacts);
   }
 
   @override

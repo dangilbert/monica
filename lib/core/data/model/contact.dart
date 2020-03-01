@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:collection/collection.dart';
 
 import 'package:monica/core/data/model/account.dart';
 import 'package:monica/core/data/model/contact/address/address.dart';
@@ -215,6 +216,8 @@ class Contact {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
+    var listEq = ListEquality().equals;
+
     return o is Contact &&
         o.id == id &&
         o.object == object &&
@@ -234,11 +237,11 @@ class Contact {
         o.stayInTouchFrequency == stayInTouchFrequency &&
         o.stayInTouchTriggerDate == stayInTouchTriggerDate &&
         o.information == information &&
-        o.addresses == addresses &&
-        o.tags == tags &&
+        listEq(o.addresses, addresses) &&
+        listEq(o.tags, tags) &&
         o.statistics == statistics &&
-        o.contactFields == contactFields &&
-        o.notes == notes &&
+        listEq(o.contactFields, contactFields) &&
+        listEq(o.notes, notes) &&
         o.url == url &&
         o.account == account &&
         o.createdAt == createdAt &&
