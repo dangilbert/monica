@@ -11,6 +11,9 @@
     <a href="https://codecov.io/gh/dangilbert/monica">
   <img src="https://codecov.io/gh/dangilbert/monica/branch/master/graph/badge.svg" />
 </a>
+  <a href="https://www.codacy.com/manual/dangilbert/monica?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dangilbert/monica&amp;utm_campaign=Badge_Grade">
+    <img src="https://api.codacy.com/project/badge/Grade/b297d518857249c09da822237325c434" />
+  </a>
 <a href="https://github.com/dangilbert/monica/actions">
   <img src="https://github.com/dangilbert/monica/workflows/master/badge.svg">
 </a>
