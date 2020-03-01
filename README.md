@@ -14,6 +14,9 @@
 <a href="https://github.com/dangilbert/monica/actions">
   <img src="https://github.com/dangilbert/monica/workflows/master/badge.svg">
 </a>
+  <a href="https://github.com/dangilbert/monica/actions">
+  <img src="https://github.com/dangilbert/monica/workflows/Deploy%20tagged%20build/badge.svg">
+</a>
     <br />
     <a href="https://github.com/dangilbert/monica/issues">Report Bug</a>
     ·
