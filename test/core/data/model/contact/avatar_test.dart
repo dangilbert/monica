@@ -24,7 +24,7 @@ test('valid avatar json decoded correctly', () async {
     expect(Avatar.fromJson(testAvatarJson), testAvatar);
   });
 
-  test('avatar toJson renders acatar correctly', () async {
+  test('avatar toJson renders avatar correctly', () async {
     expect(jsonDecode(testAvatar.toJson()), jsonDecode(testAvatarJson));
   });
 
