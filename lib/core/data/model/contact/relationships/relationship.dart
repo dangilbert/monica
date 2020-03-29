@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:collection/collection.dart';
+import 'package:monica/core/data/model/contact/relationships/relationship_contact.dart';
 
 class Relationship {
   final int total;
-  final List<dynamic> contacts;
+  final List<RelationshipContact> contacts;
   Relationship({
     this.total,
     this.contacts,
@@ -11,7 +12,7 @@ class Relationship {
 
   Relationship copyWith({
     int total,
-    List<dynamic> contacts,
+    List<RelationshipContact> contacts,
   }) {
     return Relationship(
       total: total ?? this.total,
@@ -22,7 +23,7 @@ class Relationship {
   Map<String, dynamic> toMap() {
     return {
       'total': total,
-      'contacts': List<dynamic>.from(contacts.map((x) => x)),
+      'contacts': List<dynamic>.from(contacts.map((x) => x.toMap())),
     };
   }
 
@@ -31,7 +32,10 @@ class Relationship {
 
     return Relationship(
       total: map['total']?.toInt(),
-      contacts: List<dynamic>.from(map['contacts']),
+      contacts: map['contacts'] != null
+          ? List<RelationshipContact>.from(
+              map['contacts']?.map((x) => RelationshipContact.fromMap(x)))
+          : [],
     );
   }
 
